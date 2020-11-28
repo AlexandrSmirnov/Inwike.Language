@@ -1,0 +1,69 @@
+<%= form_for [:admin, @opinion] do |f| %>
+
+  <% if @opinion.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@opinion.errors.count, "error") %> prohibited
+        this article from being saved:</h2>
+      <ul>
+      <% @opinion.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <label class="control-label" for="student_name"><%= f.label :student_name %></label>
+    <div class="controls">
+        <%= f.text_field :student_name, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="tutor_id"><%= f.label :tutor %></label>
+    <div class="controls">
+        <%= f.collection_select :tutor_id, Tutor.all, :id, :name, {:include_blank => "Преподаватель не выбран"}, {:class => "form-control"} %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="service_id"><%= f.label :service %></label>
+    <div class="controls">
+        <%= f.collection_select :service_id, Service.all, :id, :name, {:include_blank => "Курс не выбран"}, {:class => "form-control"} %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="fb_link">Профиль в Facebook</label>
+    <div class="controls">
+        <%= f.text_field :fb_link, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="vk_link">Профиль в VK</label>
+    <div class="controls">
+        <%= f.text_field :vk_link, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="progress"><%= f.label :progress %></label>
+    <div class="controls">
+        <%= f.text_field :progress, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="text"><%= f.label :text %></label>
+    <div class="controls">
+        <%= f.text_area :text, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit "Сохранить", class: "btn btn-primary" %>
+    <%= link_to "Назад", admin_users_path, class: "btn" %>
+  </div>
+
+<% end %>

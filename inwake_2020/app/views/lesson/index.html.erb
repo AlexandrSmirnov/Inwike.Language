@@ -1,0 +1,195 @@
+<div class="col-lg-8 col-md-9 full_height" id="conference-box">
+
+<%# ИМЯ ВКЛАДКИ В БРАУЗЕРЕ %>      
+      <script>
+        document.title = 'Чат с роботом';
+      </script>
+
+<%# КНОПКА ОБНОВЛЕНИЯ СТРАНИЦЫ (ДЛЯ ВХОДА В ВИДЕО ЧАТ) %>      
+<%# if current_user.has_role?(:student) %>
+  <% if mobile_device == "desktop" %>
+    <div class="box" class="box-content center conference-content">
+      <div>      
+      <button id="refreshButton" type="button" onClick="window.location.reload(true)" class="btn btn-success btn-lg">Анализ</button>
+      </div>      
+    </div>
+  <% end %>     
+<%# end %>
+      
+<%# if current_user.has_role?(:student) %>
+  <% if ((mobile_device == "android") || (mobile_device == "mobile")) %>
+    <div class="box" class="box-content center conference-content">
+      <div>      
+      <button id="refreshButton" type="button" onClick="window.location.reload(true)" class="btn btn-success btn-sm">Анализ</button>
+      </div>      
+    </div>
+  <% end %>     
+<%# end %>      
+
+      
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Разборчивость:</th>
+            <th>Темп:</th>
+            <th>Паузы:</th>
+            <th>Настроение:</th>
+            <th>Интонация:</th>
+            <th> </th>
+          </tr>
+        </thead>   
+        <tbody>                                
+
+        <%# @users.each do |user| %>                                
+          <tr>
+            <th>Нечеткая</th>
+            <th>Быстрый</th>
+            <th>Нет паузы</th>
+            <th>Негативное</th>
+            <th>Яркая</th>  
+          </tr>
+        <%# end %>                                  
+        </tbody>
+      </table>
+      
+      
+       <%#=
+        if current_user.has_role? :student
+          if current_user.tutors.first.has_active_lesson_with_student?(current_user.id)
+            if (current_user.tutors.first.id == 4)
+              render(:partial => "lesson/jitsi_student_tutor2")
+            end        
+          else
+           if current_user.tutors.last.has_active_lesson_with_student?(current_user.id)
+             if (current_user.tutors.last.id == 4)
+              render(:partial => "lesson/jitsi_student_tutor2")
+            end
+           end          
+          end
+        end
+       %>  
+
+      <%#=
+          if (current_user.id == 4)
+             render(:partial => "lesson/jitsi_tutor2")
+          end        
+      %>      
+     
+      <%#=
+        if (current_user.has_role? :admin) && (mobile_device == "desktop")
+           render(:partial => "lesson/iframe_admin")
+        end
+      %>      
+      <%#=
+        if (current_user.has_role? :admin) && ((mobile_device == "android") || (mobile_device == "mobile"))
+           render(:partial => "lesson/iframe_admin_mobile")
+        end
+      %>         
+        
+      <%#=
+        if (current_user.has_role? :student) && (current_user.roles.count < 2)
+             if (mobile_device == "desktop")
+              render(:partial => "lesson/iframe_not_admin")
+             end
+             #if (mobile_device == "ios")
+              #render(:partial => "lesson/iframe_admin_ios")
+             #end
+        end
+      %>
+      <%#=
+        if (current_user.has_role? :student) && (current_user.roles.count < 2)
+             if ((mobile_device == "android") || (mobile_device == "mobile"))
+              render(:partial => "lesson/iframe_not_admin_mobile")
+             end           
+             #if (mobile_device == "ios")
+              #render(:partial => "lesson/iframe_admin_ios")
+             #end
+        end
+      %>        
+      
+      <%#=
+        if (current_user.has_role? :tutor) && (current_user.roles.count < 2)
+             if (mobile_device == "desktop")
+              render(:partial => "lesson/iframe_not_admin")
+             end
+        end
+      %>         
+
+      <%#=
+        if (current_user.has_role? :tutor) && (current_user.roles.count < 2)
+             if ((mobile_device == "android") || (mobile_device == "mobile"))
+              render(:partial => "lesson/iframe_not_admin_mobile")
+             end
+        end
+      %>       
+
+      
+      
+      
+      
+  </div>
+
+<div class="col-lg-4 col-md-3 full_height">
+  <div class="box full_height">
+    <div class="box-header chat-header">
+      <div class="row">
+        <div class="col-lg-6">
+          <h2><i class="fa fa-comment"></i><span class="break"></span><%= t('lesson.messages') %></h2>   
+        </div>               
+        <div class="col-lg-6 chat-search-box">
+          <input id="chatSearch" type="text" class="form-control input-sm" placeholder="<%= t('lesson.search') %>">       
+          <a id="chatSearchClear" href="javascript:void(0)" class="hidden">
+            <i class="fa fa-times"></i>
+          </a>          
+        </div>
+      </div>
+    </div>
+    <div class="chat-student-select" id="chatUserSelectBox">
+      <select class="form-control chat-student-select__select" id="chatUserSelect"></select>
+    </div>
+    <div class="box-content">
+      <ul class="chat" id="chat">
+        <li class="chat-label" id="chat-label-no-messages"><%= t('lesson.no_messages') %></li>
+        <li class="chat-label" id="chat-label-loading"><%= t('lesson.loading_messages') %></li>
+        <li id="chat-label-typing"><img src="<%= image_url('typing.gif') %>"></li>
+      </ul>
+      <div class="chat-form">
+        <textarea id="chatMsg" disabled></textarea>
+        
+        <div class="chat-controls row">
+            <div class="col-sm-7">
+              <button class="btn btn-info" id="sendMsgButton" disabled><%= t('lesson.send_message') %></button>   
+              <button class="btn btn-info" id="saveMsgButton"><%= t('general.save') %></button>   
+              <button class="btn btn-default" id="cancelMsgButton"><%= t('general.cancel') %></button>   
+              
+              <!--<span class="chat-controls__hint"><%= t('general.or_press') %> <kbd>Enter</kbd></span> -->           
+            </div>
+            <div class="col-sm-5 text-right">
+              <form action="<%= messenger_upload_file_path %>" id="file-upload-form" method="post" enctype="multipart/form-data">
+                <button class="btn btn-default" id="file-upload-button" disabled title="<%= t('lesson.upload_file') %>"><i class="fa fa-upload"></i></button>
+                <input id="file-upload-input" type="file" name="message[name][]" multiple/>          
+              </form>
+            </div>  
+        </div>        
+        
+      </div>	
+    </div>
+  </div>
+</div>
+
+<% if false && current_user.board %>
+<div class="col-sm-12">
+  <div class="box">
+    <div class="box-header">
+      <h2><i class="fa fa-pencil-square"></i><span class="break"></span><%= t('lesson.board') %></h2>
+      <div class="box-icon">
+        <a class="btn-close" href="javascript:refreshBoard()" title="<%= t('general.refresh') %>"><i class="fa fa-repeat"></i></a>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>	
+<% end %>
+
+
+<%= javascript_tag "var AUTH_TOKEN = '#{form_authenticity_token}';" if protect_against_forgery? %>

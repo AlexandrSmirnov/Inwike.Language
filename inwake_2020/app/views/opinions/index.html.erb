@@ -1,0 +1,62 @@
+<% title t("main.opinions") %>
+
+<div class="container">
+    
+  <div class="page-top">
+    <div class="content-top row">
+      <%= render_breadcrumbs :builder => ::BreadcrumbsBuilder, :class_main => 'col-sm-8 col-xs-12', :class_postfix => 'dark' %>
+    </div>					
+    <div class="content-header  row">
+      <h1 class="header-2 margins-no-top col-xs-12 col-sm-3 col-lg-2"><%=  t("main.opinions") %></h1>
+      <div class="opinion-tabs col-xs-12 col-sm-9 col-lg-10">
+          <a href="<%= opinions_path %>" class="opinion-tabs__element <%= @about_system ? '' : 'opinion-tabs__element_active' %>">о преподавателях</a>
+          <a href="<%= opinions_system_path %>" class="opinion-tabs__element <%= @about_system ? 'opinion-tabs__element_active' : '' %>">о системе</a>
+      </div>
+    </div>
+  </div>
+    
+  <div class="reviews-list row">
+
+    <% i = 0 %>
+    <% @opinions.each do |opinion| %>      
+      <div class="col-xs-12">
+        <div class="review-element">
+          <div class="review-element__icon"><i class="icon-comment"></i></div>
+          <div class="review-element__text">
+            <%= opinion.text %>
+          </div>            
+          <% unless opinion.tutor_id.blank? %>
+            <div class="review-element__tutor">
+                <% if opinion.tutor.hidden %>
+                  Преподаватель: <b><%= opinion.tutor.name %></b> (временно не активен)
+                <% else %>
+                  Преподаватель: <a href="<%= tutor_path(:url => opinion.tutor.url) %>" class="link" target="_blank"><%= opinion.tutor.name %></a>
+                <% end %>  
+            </div>
+          <% end %>  
+          <div class="review-element__user">
+            <%= opinion.student_name %>
+
+            <!--
+            <% unless opinion.progress.blank? %>
+              (<%= opinion.progress %>)
+            <% end %>
+            -->
+          </div>
+        </div>
+      </div>
+      <% i += 1 %>
+      <% if i % 2 == 0 %>
+        <!--<div class="review-element-separator"></div>-->
+      <% end %>
+    <% end %>
+
+  </div>
+    
+</div>
+
+<% if @current_page < @pages_count %>
+  <div class="opinions-show-others">
+    <a href="<%= url_for(params.merge({:page => @current_page + 1})) %>" onclick="return loadMoreOpinions(this);" class="button button_large button_turquoise autoload" id="load-more-opinions">Показать больше отзывов</a>
+  </div>
+<% end %>  

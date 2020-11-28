@@ -1,0 +1,200 @@
+.graph {
+    min-height: 305px;
+}
+.todo-element {
+    word-wrap: break-word;
+}
+.todo-element_clickable,
+.todo-text_clickable {
+    cursor: pointer;
+}
+.student-box,
+.time-box {
+    box-sizing: border-box;
+    margin: 0 0 15px 10px;
+    display: inline-block;
+    color: #646464;
+}
+.student-box {
+    margin-right: 30px;
+}
+.add-button-box {
+    float: right;
+    margin: 5px 3px 0 0;
+}
+.student-box__small,
+.time-box__small {
+    font-size: 12px;
+}
+.student-box__title,
+.time-box__title {
+    font-size: 16px;
+}
+.todo-input {
+    border: 1px solid #dddddd;
+    width: calc(100% - 40px);
+    margin-bottom: 10px;
+}
+.todo-textarea {
+    width: 100%;
+    height: 60px;
+    min-height: 60px;
+    margin: 10px 0 0;
+}
+.todo-checkbox {
+    vertical-align: middle;
+    margin-top: 0 !important;
+    cursor: pointer;
+}
+.timeslot-icon {
+    cursor: pointer;
+}
+.timeslot-icon__canvas {
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    position: absolute;
+    z-index: -1;
+    opacity: 0.38;
+}
+.task-title,
+.comments-title {
+    border-bottom: 1px solid #eee;
+    margin: 20px 0 5px;
+    padding: 0 10px 8px;
+}
+.comments-title {
+    margin-top: 32px;
+}
+.todo-empty {
+    color: #aaa;
+    font-size: 14px;
+    margin: 0 0 5px 10px;
+}
+.todo-text_done {
+    color: #78cd51;
+}
+.todo-title {
+    font-size: 14px;
+    padding-right: 65px;
+}
+.homework-title {
+    width: 50%;
+    display: inline-block;
+}
+.tabs {
+    float: right;
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+.timeline-empty {
+    text-align: center;
+}
+.timeline-empty__icon {
+    background: #fdfdfd;
+    border: 7px solid whitesmoke;
+    border-radius: 50em;
+    color: whitesmoke;
+    font-size: 40px;
+    height: 100px;
+    line-height: 84px;
+    margin: 50px auto 38px;
+    text-align: center;
+    vertical-align: middle;
+    width: 100px;
+}
+.timeline-empty__text {
+    background: whitesmoke;
+    border-radius: 50em;
+    color: #666666;
+    display: inline-block;
+    line-height: 30px;
+    padding: 0 12px;
+}
+.comments-input {
+    background: whitesmoke;
+    border: 1px solid #dddddd;
+    border-radius: 2px;
+    color: #3b3b41;
+    font-size: 12px;
+    height: 28px;
+    min-height: 28px;
+    margin: 8px 0;
+    padding: 4px;
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+}
+.comments-input_inactive {
+    cursor: pointer;
+}
+.comments-buttons {
+    display: none;
+}
+.comments-list {
+    list-style: none;
+    padding: 0;
+}
+.comments-element {
+    margin: 20px 0 0;
+}
+.comments-element__user {
+    
+}
+.comments-element__time {
+    color: #646464;
+    font-size: 12px;
+}
+.comments-element__text {
+    background: whitesmoke;
+    border: 1px solid #dddddd;
+    border-radius: 2px;
+    font-size: 12px;
+    padding: 5px;
+}
+.todo-add-attachment {
+    margin: 15px 0 10px;
+    background: whitesmoke;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    display: inline-block;
+}
+.attachment-comment,
+.attachment-file,
+.attachment-buttons {
+    display: inline-block;
+    padding: 5px 10px 5px 5px;
+}
+.attachment-comment:last-child,
+.attachment-file:last-child,
+.attachment-buttons:last-child {
+    padding-right: 5px;
+}
+.attachment-comment__input,
+.attachment-file__input {
+    display: inline-block;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    line-height: 18px;
+    padding: 1px 3px;
+    vertical-align: middle;
+    width: 200px;
+}
+.attachment-file__input {
+    border-radius: 3px 0 0 3px;    
+    border-right: none;
+    width: 115px;
+    cursor: pointer;
+}
+.attachment-file__browse {
+    border-radius: 0 3px 3px 0;    
+}
+.todo-files {
+}
+.todo-files_element {
+    line-height: 28px;
+}
+.todo-files_element:first-child {
+    margin-top: 16px;
+}

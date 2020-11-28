@@ -1,0 +1,123 @@
+<%= form_for [:admin, @user] do |f| %>
+
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited
+        this article from being saved:</h2>
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <label class="control-label" for="name"><%= f.label :name %>
+    </label>
+    <div class="controls">
+        <%= f.text_field :name, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="email"><%= f.label :email %>
+    </label>
+    <div class="controls">
+        <%= f.text_field :email, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="role"><%= f.label :role %>
+    </label>
+    <div class="controls">
+      <% for role in User::ROLES %>
+        <%= check_box_tag "user[roles][#{role}]", role, @user.roles.include?(role), {:name => "user[roles][]"}%>
+        <%= label_tag "user_roles_#{role}", role.humanize %><br />
+      <% end %>
+      <%= hidden_field_tag "user[roles][]", "" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="locale"><%= f.label :locale %>
+    </label>
+    <div class="controls">
+        <%= f.collection_select :locale, User::LOCALES, :to_s, :humanize, {:prompt => 'None'}, :class=>'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="time_zone"><%= f.label :time_zone %>
+    </label>
+    <div class="controls">
+      <%= f.time_zone_select :time_zone, nil, {:prompt => 'None'}, :class=>'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="tutors"><%= f.label :tutors %>
+    </label>
+    <div class="controls">
+        <%= f.collection_select :tutor_ids, User.with_role('tutor'), :id, :name, {:include_blank => true}, {:multiple => true, :class=>'form-control select2'} %>
+    </div>
+  </div>
+
+<div class="form-group">
+    <label class="control-label" for="password"><%= f.label :password %>
+    </label>
+    <div class="controls">
+        <%password_placeholder = if action_name == 'edit' then "Пароль задан" else '' end%>
+        <%= f.password_field :password, class: "form-control", autocomplete: "off", placeholder: password_placeholder %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="fee"><%= f.label :fee %></label>
+    <div class="controls">
+        <%= f.text_field :fee, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="transfer_fee"><%= f.label :transfer_fee %></label>
+    <div class="controls">
+        <%= f.number_field :transfer_fee, class: "form-control", :step => '0.01'  %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit "Сохранить", class: "btn btn-primary" %>
+    <%= link_to "Назад", admin_users_path, class: "btn" %>
+  </div>
+
+<% end %>
+
+<%#*Старые пункты меню%>
+
+  <%#*<div class="form-group">%>
+    <%#*<label class="control-label" for="lease"><%= f.label :lease %>
+<%#*</label>%>
+    <%#*<div class="controls">%>
+        <%#= f.check_box :lease %>
+    <%#*</div>%>
+  <%#*</div>%>
+
+
+  <%#*<div class="form-group">%>
+    <%#*<label class="control-label" for="board"><%= f.label :board %>
+<%#*</label>%>
+    <%#*<div class="controls">%>
+        <%#= f.check_box :board %>
+    <%#*</div>%>
+  <%#*</div>%>
+
+  <%#*<div class="form-group">%>
+    <%#*<label class="control-label" for="quizlet_id"><%= f.label :quizlet_id %>
+<%#*</label>%>
+    <%#*<div class="controls">%>
+        <%#= f.text_field :quizlet_id, class: "form-control" %>
+    <%#*</div>%>
+  <%#*</div>%>
+

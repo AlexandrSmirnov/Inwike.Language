@@ -1,0 +1,324 @@
+<%= render 'filter' %>  
+
+<% if @classes %>
+  <div class="col-sm-3">
+    <div class="box">
+      <div class="box-header">
+        <h2><i class="fa fa-calendar"></i><span class="break"></span>Занятия</h2>
+      </div>
+      <div class="box-content">      
+
+            <table class="table table-condensed">
+              <thead>
+                <tr>
+                  <th>Всего занятий</th>
+                  <th><%= @classes[:total] %></th>                  
+                </tr>
+              </thead>
+              <tbody>                
+                <tr>
+                  <td>Бесплатных</td>
+                  <td><%= @classes[:free] %></td>
+                </tr>
+                <tr>
+                  <td>Оплачено</td>
+                  <td><%= @classes[:paid] %></td>
+                </tr>
+                <tr>
+                  <td>Не оплачено</td>
+                  <td><%= @classes[:not_paid] %></td>
+                </tr>
+                <tr>
+                  <td>Несостоявшиеся</td>
+                  <td><%= @classes[:missed] %></td>
+                </tr>
+                <tr>
+                  <td>Несостоявшиеся (оплаченные)</td>
+                  <td><%= @classes[:missed_paid] %></td>
+                </tr>
+              </tbody>           
+            </table>
+    
+      </div>  
+    </div>
+  </div>
+<% end %>
+
+<% if @students %>
+  <div class="col-sm-3">
+    <div class="box">
+      <div class="box-header">
+        <h2><i class="fa fa-users"></i><span class="break"></span>Ученики</h2>
+      </div>
+      <div class="box-content">
+            <table class="table table-condensed">
+              <thead>
+                <tr>
+                  <th>Всего занятий</th>
+                  <th><%= @classes[:total] %></th>                  
+                </tr>
+              </thead>
+              <tbody>  
+                <% @students.each do |student| %>
+                  <tr>
+                    <td><%= student.student.name %></td>
+                    <td><%= student.count %></td>
+                  </tr>
+                <% end %>
+              </tbody>           
+            </table>
+      
+      </div>  
+    </div>
+  </div>
+<% end %>
+
+
+<% if @students %>
+<div class="col-sm-3">
+  <div class="box">
+    <div class="box-header">
+      <h2><i class="fa fa-calendar"></i><span class="break"></span>Платежи</h2>
+    </div>
+    <div class="box-content">     
+
+      <table class="table table-condensed">
+        <thead>
+          <tr>
+            <th>Средств поступило</th>
+            <th><b class="green"><%= @benefits[:payments] %></b></th>                  
+          </tr>
+        </thead>
+        <tbody>                
+          <tr>
+            <td>Стоимость состоявшихся занятий</td>
+            <td><b class="blue"><%= @benefits[:cost] %></b></td>
+          </tr>
+          <tr>
+            <td>Неоплачено состоявшихся</td>
+            <td><b class="red"><%= @benefits[:unpaid] %></b></td>
+          </tr>
+          <tr>
+            <td>Оплачено несостоявшихся</td>
+            <td><b class="yellow"><%= @benefits[:overpaid] %></b></td>
+          </tr>
+        </tbody>           
+      </table>
+    
+    </div>  
+  </div>
+</div>
+
+<div class="col-sm-3">
+  <div class="box">
+    <div class="box-header">
+      <h2><i class="fa fa-calendar"></i><span class="break"></span>Расчеты с преподавателем</h2>
+    </div>
+    <div class="box-content">     
+
+      <table class="table table-condensed">
+        <thead>
+          <tr>
+            <th>Средств поступило</th>
+            <th><b class="green"><%= @benefits[:payments] %></b></th>                  
+          </tr>
+        </thead>
+        <tbody>                
+          <tr>
+            <td>С учетом комиссии</td>
+            <td><%= @benefits[:payments_due] %></td>
+          </tr>
+          <tr>
+            <td>Вознаграждение преподавателя</td>
+            <td><%= @benefits[:fee]*0 %></td>
+          </tr>
+          <tr>
+            <td>Для перевода</td>
+            <td><%= @benefits[:fee_for_transfer]*0 %></td>
+          </tr>
+          <tr>
+            <td>Доход</td>
+            <td><%= @benefits[:income]*(-1) %></td>
+          </tr>
+        </tbody>           
+      </table>
+    
+    </div>  
+  </div>
+</div>
+<% end %>
+
+<% if @schedules %>
+  <div class="col-sm-12">
+    <div class="box">
+      <div class="box-header">
+        <h2><i class="fa fa-align-justify"></i><span class="break"></span>Список занятий</h2>
+      </div>
+      <div class="box-content">
+        <%= form_for [:admin, Report.new] do |f| %>
+          
+          <% @schedules.each do |schedule| %>
+          
+            <% if schedule.paid && !schedule.report %>
+              <%= hidden_field_tag "report[classes[#{schedule.id}]]", 1, :id => "report_classes_#{schedule.id}_hidden" %>
+            <% end %>
+          
+          <% end %>
+          
+          <table class="table table-striped bootstrap-datatable datatable">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Дата</th>
+                <th>Ученик</th>
+                <th>Тип</th>
+                <th>Статус</th>
+                <th>Начало</th>
+                <th>Конец</th>
+                <th>Длительность</th>
+                <th>Цена</th>
+                <th>С учетом комиссии</th>
+                <th>Ставка</th>
+                <th>Экспорт</th>
+              </tr>
+            </thead>   
+            <tbody>     
+              <% @schedules.each do |schedule| %>
+                <tr>
+                  <td><%= schedule.id %></td>
+                  <td><%= DateTime.strptime(schedule.time.to_s, '%s').strftime('%Y-%m-%d %H:%M:%S UTC') %></td>
+                  <td><%= schedule.student.name %></td>
+                  <td><%= schedule.class_type.name if schedule.class_type %></td>
+                  <td><%= schedule.report_label.html_safe %></td>
+                  <td><%= DateTime.strptime(schedule.start_time.to_s, '%s').strftime('%H:%M:%S UTC') if schedule.start_time? %></td>
+                  <td><%= DateTime.strptime(schedule.end_time.to_s, '%s').strftime('%H:%M:%S UTC') if schedule.end_time? %></td>
+                  <td><%= schedule.real_duration %></td>
+                  <td><%= schedule.cost %></td>
+                  <td><%= schedule.cost_with_due_from_payment if schedule.cost_with_due_from_payment.nonzero? %></td>
+                  <td><%= schedule.tutor_fee %></td>
+                  <td>
+                    <% if schedule.paid %>
+                      <% if schedule.report %>
+                        <i class="fa fa-thumb-tack" title="Занятие уже привязано к другому отчету"></i>
+                      <% else %>
+                        <%= check_box "report", "classes[#{schedule.id}]", {checked: true, id: "report_classes_#{schedule.id}", class: "report_export_flag"} %>
+                      <% end %>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>     
+          </table>
+          
+          <% if @filter_params['start'] && @filter_params['end'] && @filter_params['tutor_id'] %>
+            <%= hidden_field_tag "report[start]", @filter_params['start'] %>
+            <%= hidden_field_tag "report[end]", @filter_params['end'] %>
+            <%= hidden_field_tag "report[user_id]", @filter_params['tutor_id'] %>
+            <%= submit_tag "Сохранить отчет", class: "btn btn-success" %>
+          <% end %>
+          
+        <% end %>              
+      </div>  
+    </div>
+  </div>
+<% end %>
+
+<% if @classes_all %>
+  <div class="col-lg-7">
+    <div class="box">
+      <div class="box-header">
+        <h2><i class="fa fa-calendar"></i><span class="break"></span>Занятия</h2>
+      </div>
+      <div class="box-content">      
+
+        <table class="table table-striped table-condensed">
+          <thead>
+            <tr>
+              <td></td>
+              <td><b>Всего занятий</b></td>
+              <td><b>Бесплатных</b></td>
+              <td><b class="green">Оплачено</b></td>
+              <td><b class="red">Не оплачено</b></td>
+              <td><b>Несостоявшиеся</b></td>
+              <td><b>Несостоявшиеся (оплаченные)</b></td>
+            </tr>    
+          </thead>
+          <tbody>    
+            <% @classes_all.each do |id, tutor| %>
+              <tr>
+                <td>
+                    <a href="<%= get_report_link(id, @filter_params['start'], @filter_params['end']) %>"><b><%= tutor[:name] %></b></a>
+                </td>   
+                <td><%= tutor[:total] %></td>     
+                <td><%= tutor[:free] %></td>       
+                <td><span class="green"><%= tutor[:paid] %></span></td>   
+                <td><span class="red"><%= tutor[:not_paid] %></span></td>    
+                <td><%= tutor[:missed] %></td>    
+                <td><%= tutor[:missed_paid] %></td>       
+              </tr>
+            <% end %>   
+            <tr>
+              <td><b>Всего</b></td>
+              <td><b><%= @classes_sum[:total] %></b></td>
+              <td><b><%= @classes_sum[:free] %></b></td>
+              <td><b class="green"><%= @classes_sum[:paid] %></b></td>
+              <td><b class="red"><%= @classes_sum[:not_paid] %></b></td>
+              <td><b><%= @classes_sum[:missed] %></b></td>
+              <td><b><%= @classes_sum[:missed_paid] %></b></td>
+            </tr>   
+          </tbody>           
+        </table>
+    
+      </div>  
+    </div>
+  </div>
+
+  <div class="col-lg-5">
+    <div class="box">
+      <div class="box-header">
+        <h2><i class="fa fa-calendar"></i><span class="break"></span>Расчеты с преподавателями</h2>
+      </div>
+      <div class="box-content">     
+
+        <table class="table table-striped table-condensed">
+          <thead>
+            <tr>
+              <td></td>
+              <td><b>Средств поступило</b></td>
+              <td><b>С учетом комиссии</b></td>
+              <td><b class="yellow">Вознаграждение преподавателя</b></td>
+              <td><b>Для перевода</b></td>
+              <td><b class="green">Доход</b></td>
+            </tr>   
+          </thead>
+          <tbody>     
+            <% @benefits_all.each do |id, tutor| %>
+              <tr>
+                <td>
+                    <a href="<%= get_report_link(id, @filter_params['start'], @filter_params['end']) %>"><b><%= tutor[:name] %></b></a>
+                </td>     
+                <td><%= tutor[:payments] %></td>      
+                <td><%= tutor[:payments_due] %></td>    
+                <td><span class="yellow"><%= tutor[:fee] %></span></th>      
+                <td><%= tutor[:fee_for_transfer] %></td>  
+                <td><span class="green"><%= tutor[:income] %></span></td>      
+              </tr>
+            <% end %>  
+              <tr>
+                <td><b>Всего</b></td>
+                <td><b><%= @benefits_sum[:payments] %></b></td>
+                <td><b><%= @benefits_sum[:payments_due] %></b></td>
+                <td><b class="yellow"><%= @benefits_sum[:fee] %></b></td>
+                <td><b><%= @benefits_sum[:fee_for_transfer] %></b></td>
+                <td><b class="green"><%= @benefits_sum[:income] %></b></td>
+              </tr>
+          </tbody>           
+        </table>
+
+      </div>  
+    </div>
+  </div>
+<% end %>
+
+
+<%= javascript_include_tag "admin/reports" %>

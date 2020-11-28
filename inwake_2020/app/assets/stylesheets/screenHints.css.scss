@@ -1,0 +1,53 @@
+.hint-fader {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    background: rgba(255,255,255,0.75);
+    display: none;
+    left: 0;
+    top: 0;
+}
+
+.hint-block {
+    height: 200px;
+    position: absolute;
+    text-shadow: 0 0 10px #fff;
+    width: 500px;
+    z-index: 1001;
+    font-family: 'Neucha', cursive;
+    font-size: 20px;
+    display: none;
+}
+
+.hint-block__right {
+    text-align: right;
+}
+
+.hint-block__fixed {
+    position: fixed;
+}
+
+.hint-block__left:before {
+    left: -105px;
+    background: url('tip-arrow-left.png') no-repeat top center scroll;    
+}
+
+.hint-block__right:after {
+    right: -105px;
+    background: url('tip-arrow-right.png') no-repeat top center scroll;    
+}
+
+.hint-block__left:before,
+.hint-block__right:after
+{
+    top: -25px;
+    position: absolute;
+    content: " ";
+    display: block;
+    width: 90px;
+    height: 82px;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+}

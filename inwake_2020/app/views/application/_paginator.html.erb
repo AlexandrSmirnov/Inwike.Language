@@ -1,0 +1,38 @@
+<% if count > 1 %>
+  <nav class="text-center">
+    <ul class="pagination">
+      <li class="<%= current == 1 ? 'disabled' : '' %>"><a href="<%= current == 1 ? 'javascript:void(0)' : url_for(params.merge({:page => current - 1})) %>"><span aria-hidden="true">&laquo;</span><span class="sr-only">Previous</span></a></li>
+      
+      <% count.times do |page|%>
+        <% if page + 1 == current || count < 6 %>
+          <li class="<%= page + 1 == current ? 'active' : '' %>"><%= link_to page + 1, params.merge({:page => page + 1}) %></li>
+        <% else %>  
+          
+          <% if page == 0 || page + 1 == count %>
+            <li class=""><%= link_to page + 1, params.merge({:page => page + 1}) %></li>
+          <% end %>
+            
+          <% if (page == 1 || page == 2) %>
+            <% if current < 4 %>
+              <li class=""><%= link_to page + 1, params.merge({:page => page + 1}) %></li>
+            <% elsif page == 1 %> 
+              <li class="disabled"><a>&hellip;</a></li>
+            <% end %>
+          <% end %>
+              
+          <% if (page == count - 2 || page == count - 3) %>
+            <% if current > count - 3 %>
+              <li class=""><%= link_to page + 1, params.merge({:page => page + 1}) %></li>
+            <% elsif page == count - 2 %> 
+              <li class="disabled"><a>&hellip;</a></li>
+            <% end %>
+          <% end %>
+              
+            
+        <% end %>
+      <% end %>
+        
+      <li class="<%= current == count ? 'disabled' : '' %>"><a href="<%= current == count ? 'javascript:void(0)' :  url_for(params.merge({:page => current + 1}))  %>"><span aria-hidden="true">&raquo;</span><span class="sr-only">Next</span></a></li>
+    </ul>
+  </nav>
+<% end %>

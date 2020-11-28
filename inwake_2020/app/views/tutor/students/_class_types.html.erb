@@ -1,0 +1,23 @@
+<%= form_for [:tutor, @student] do |f| %>
+  <div class="form-group">
+    <div class="controls class-types">
+      <%
+        class_types = {}
+        @student.tutor_classes.each { |class_type| class_types[class_type.class_type_id] = {:cost => class_type.cost}}
+      %>
+      <%= f.collection_check_boxes :class_type_ids, @class_types, :id, :name do |b|
+            "<div class=\"row tutor-class-element\">
+                <div class=\"col-xs-9\">#{b.check_box}  #{b.label}</div>
+                <div class=\"col-xs-3 tutor-class-fields\">
+                  #{ hidden_field_tag("user[class_type_list][]", b.value) }
+                  #{ text_field_tag("user[class_type_costs][]", class_types.has_key?(b.value) ? class_types[b.value][:cost] : nil, {:class => "form-control input-sm", :placeholder => "Цена", :id => "user_class_type_costs_" + b.value.to_s, 'data-field' => 'cost'}) }
+               </div>
+             </div>".html_safe
+          end 
+      %>
+    </div>
+  </div>
+  <div class="form-actions">
+    <%= f.submit "#{t('general.save')}", class: "btn btn-sm btn-primary" %>
+  </div>
+<% end %>

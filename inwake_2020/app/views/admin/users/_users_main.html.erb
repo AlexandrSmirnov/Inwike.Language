@@ -1,0 +1,78 @@
+<div class="col-sm-12">
+  <div class="box">
+    <div class="box-header">
+      <h2><i class="fa fa-align-justify"></i><span class="break"></span>Пользователи</h2>
+    </div>
+    <div class="box-content">
+      
+      <div class="row">
+        <div class="col-sm-10">
+          <%= render 'filter' %>
+        </div>
+        <div class="col-sm-2 text-right">
+          <a class="btn btn-success" href="<%= new_admin_user_path %>"><i class="fa fa-plus"></i> Добавить</a>
+        </div>        
+      </div>
+            
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>
+              <a href="<%= url_for(params.merge({ 'sort' => {'field' => 'id', 'order' => (!params['sort'] || (params['sort']['field'] == 'id' && params['sort']['order'] == 'asc')) ? 'desc' : 'asc' } } )) %>">
+                <% if !params['sort'] || (params['sort']['field'] == 'id') %>
+                  <i class="fa fa-long-arrow-<%= (!params['sort'] || params['sort']['order'] == 'asc') ? 'down' : 'up' %>"></i>
+                <% end %>
+                ID
+              </a>
+            </th>
+            <th>
+              <a href="<%= url_for(params.merge({ 'sort' => {'field' => 'name', 'order' => (params['sort'] && (params['sort']['field'] == 'name' && params['sort']['order'] == 'asc')) ? 'desc' : 'asc' } } )) %>">
+                <% if params['sort'] && (params['sort']['field'] == 'name') %>
+                  <i class="fa fa-long-arrow-<%= (!params['sort'] || params['sort']['order'] == 'asc') ? 'down' : 'up' %>"></i>
+                <% end %>
+                Имя
+              </a>              
+            </th>
+            <th>E-mail</th>
+            <th>Роли</th>
+            <th>Долги</th>
+            <th>Дата регистрации</th>
+            <th>Последняя активность</th>
+            <th> </th>
+          </tr>
+        </thead>   
+        <tbody>                                
+
+        <% @users.each do |user| %>                                
+          <tr>
+            <td><%= user.id %></td>
+            <td><%= user.name %></td>
+            <td><%= user.email %></td>
+            <td><%= user.roles.join(", ") %></td>
+            <td><%= user.created_at %></td>   
+            <td><span id="time" data-toggle="tooltip" data-placement="top" title="Tooltip on top" onclick="tip()"><%= user.current_sign_in_at %></span></td>   
+            <td>
+              <a class="btn btn-info" href="<%= edit_admin_user_path(user) %>"><i class="fa fa-edit "></i></a>
+              <a class="btn btn-danger" href="<%= admin_user_path(user) %>" data-method="delete" rel="nofollow" data-confirm="Действительно удалить?"><i class="fa fa-trash-o "></i></a>
+            </td>
+          </tr>
+        <% end %>                                  
+        </tbody>
+      </table>  
+      <script>
+        function tip() {
+        var d = new Date();
+        var span = document.getElementById("time");
+        var t = span.innerHTML;
+        t = t.trim();
+        d = $.fullCalendar.parseDate("2015-01-27 18:35:50+0300");
+        console.log(d.toUTCString());
+      }
+      </script>
+      
+      <%= render 'application/paginator', :count => @pages_count, :current => @current_page %>
+      
+    </div>
+  </div>
+</div><!--/col-->
+

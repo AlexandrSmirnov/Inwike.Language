@@ -1,0 +1,87 @@
+<div class="col-sm-12">
+  <div class="box">
+    <div class="box-header">
+      <h2><i class="fa fa-align-justify"></i><span class="break"></span><%= t('calendar.calendar') %> занятий</h2>
+    </div>
+    <div class="box-content">
+      
+      <div class="row">
+        <div class="col-sm-2">
+      <%#*Блок отображения часового пояса в календаре:%>
+      <%#*Для учителя%>            
+            <%#*<div id="timezone-box">%>
+                <%#*<h3>%>
+                    <%#= t('calendar.timezone') %> 
+                <%#*</h3>%>
+                <%#*<p>%>
+                    <%#= t('calendar.timezone_text') %>
+                <%#*</p>%>
+                <%#*<div class="controls">%>
+                    <%#= collection_select(:filter, :timezone, tutor_timezone_list, :first, :last, { :selected => tutor_timezone_list.keys.first}, {:class => "form-control"}) %>
+                <%#*</div>%>
+                <%#*</br>%>
+            <%#*</div>%>            
+            
+            <div id="external-events">
+              <h3><%= t('calendar.new_event') %></h3>
+              <p><%= t('calendar.new_event_text').html_safe %></p>
+              <div class="external-event badge badge-success occupied"><%= t('calendar.lesson') %></div>
+            </div>
+          
+            <div id="events-info">
+      <script>
+        document.title = 'Календарь';
+      </script>
+            </div>      
+          
+          <% if @debtors.length > 0 %> 
+            <div class="calendar-message text-danger">
+              <h3>Неоплаченные занятия!</h3>
+              <p>У ваших учеников есть прошедшие неоплаченные занятия:</p>
+                            
+              <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">                
+                
+              <% @debtors.each do |student| %>
+                <%
+                  unpaided_lessons = student.student_schedule.assigned.tutor(current_user.id).carried_out.not_paid
+                %>                
+                <div class="panel panel-default">
+                  <div class="panel-heading" role="tab">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#debtor-lessons-<%= student.id %>" aria-expanded="true">
+                        <%= student.name %> <span class="badge badge-danger"><%= unpaided_lessons.length %></span>
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="debtor-lessons-<%= student.id %>" class="panel-collapse collapse" role="tabpanel">
+                    <div class="panel-body">
+                      <% unpaided_lessons.each do |lesson| %>  
+                        <%= DateTime.strptime(lesson.time.to_s, '%s').in_time_zone(Time.zone).strftime('%d %B %Y (%H:%M)') %> <br/>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+                            
+              </div>
+            </div>
+          <% end %>
+          
+        </div>
+        <div class="col-sm-10">
+            <div id="calendar"></div>	
+        </div>	
+      </div>
+      
+    </div>
+  </div>
+</div><!--/col-->
+
+<%= stylesheet_link_tag "calendar" %>   
+
+<%= javascript_tag "var STUDENTS = {#{@students_array.join(", ")}};" %>
+<%= javascript_tag "var LEASE = {#{@lease_array.join(", ")}};" %>
+<%= javascript_tag "var CLASS_TYPES = {#{@class_types.join(", ")}};" %>
+<%= javascript_tag "var AUTH_TOKEN = '#{form_authenticity_token}';" if protect_against_forgery? %>
+
+<%= javascript_include_tag "tutor/calendar" %>

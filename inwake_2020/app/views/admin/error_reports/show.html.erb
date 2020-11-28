@@ -1,0 +1,80 @@
+<div class="col-sm-6">  
+  <div class="box">
+    <div class="box-header">
+      <h2><i class="fa fa-exclamation-triangle"></i><span class="break"></span>Отчет об ошибке</h2>
+    </div>
+    <div class="box-content">    
+      <p><b>Пользователь:</b> <%= @report.user.name %></p>
+      <p><b>Время добавления:</b> <%= @report.created_at %></p>
+      <% if @report.file? %>
+        <p><b>Файл:</b> <a href="<%= @report.file.url %>" target="_blank">Ссылка</a></p>
+      <% end %>
+      <p><b>Текст сообщения</b><br/> <%= @report.description %></p>
+    </div>    
+  </div>  
+</div>
+
+<div class="col-sm-6">  
+  <div class="box">
+    <div class="box-header">
+      <h2><i class="fa fa-laptop"></i><span class="break"></span>Служебная информация</h2>
+    </div>
+    <div class="box-content">    
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Параметр</th>
+            <th>Значение</th>
+          </tr>
+        </thead>   
+        <tbody>   
+        <% @client_info.each do |key, value| %>
+          <tr>
+            <td><%= key %></td>
+            <td><%= value %></td>
+          </tr>
+        <% end %>     
+        </tbody>
+      </table>      
+    </div>    
+  </div>  
+</div>
+
+<div class="col-sm-12">  
+  <div class="box">
+    <div class="box-header">
+      <h2><i class="fa fa-terminal"></i><span class="break"></span>Журнал пользовательских событий</h2>
+    </div>
+    <div class="box-content">      
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Время</th>
+            <th>Тип</th>
+            <th>Сообщение</th>
+          </tr>
+        </thead>   
+        <tbody>                                
+
+        <% @log.each do |message| %>
+          <%
+            class_name = ''
+            if message[1]['type'] == 'error'
+              class_name = 'danger'
+            end
+            if message[1]['type'] == 'warn' or message[1]['type'] == 'exception'
+              class_name = 'warning'
+            end              
+          %>
+          <tr class="<%= class_name %>">
+            <td><%= DateTime.strptime(message[1]['time'].to_s, '%Q').in_time_zone(Time.zone).strftime('%H:%M:%S.%L') %></td>
+            <td><%= message[1]['type'] %></td>
+            <td><%= message[1]['text'] %></td>
+          </tr>
+        <% end %>       
+          
+        </tbody>
+      </table>            
+    </div>
+  </div>
+</div><!--/col-->

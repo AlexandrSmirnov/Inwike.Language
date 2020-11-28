@@ -1,0 +1,122 @@
+<%#*<div class="box">%>
+        <iframe id="jitsiFrame" class="hidden" seamless allow="microphone; camera" frameborder="0" scrolling="auto"></iframe>
+
+      	<style type="text/css">
+            <%#*.box {%>
+                <%#*position: relative;%>
+                <%#*height: 520px;%>
+                <%#*width: calc(100% - 50px);%>
+            <%#*}%>
+            iframe {
+                margin-top: -38%;
+                margin-left: 10%;
+                margin-bottom: 7%;
+                padding-bottom: 7%;
+                position: relative;
+                <%#*width: 50%;%>
+            }
+	</style>
+    <body>
+        <script src="https://meet.jit.si/external_api.js"></script>
+        
+        <%if mobile_device == "desktop" %> 
+        <script>
+            var domain = "meet.jit.si";
+            var options = {
+                roomName: "775641312",
+                width: 840,
+                height: 620,
+                interfaceConfigOverwrite: {
+                  <%#*DEFAULT_REMOTE_DISPLAY_NAME: 'Student',%>
+      SHOW_JITSI_WATERMARK: false,
+      SHOW_WATERMARK_FOR_GUESTS: true,
+                  SHOW_POWERED_BY: false,
+                  SHOW_DEEP_LINKING_IMAGE: false,
+                    GENERATE_ROOMNAMES_ON_WELCOME_PAGE: false,
+                  DISPLAY_WELCOME_PAGE_CONTENT: false,
+                  INVITATION_POWERED_BY: false,
+                  SHOW_CHROME_EXTENSION_BANNER: false,
+                  CONNECTION_INDICATOR_AUTO_HIDE_TIMEOUT: 2000,
+                  INITIAL_TOOLBAR_TIMEOUT: 2000,
+                  TOOLBAR_TIMEOUT: 40000,
+                  
+                  FILM_STRIP_MAX_HEIGHT: 240,
+                  DISABLE_TRANSCRIPTION_SUBTITLES: true,
+                  DISABLE_DOMINANT_SPEAKER_INDICATOR: false,
+                  DISABLE_FOCUS_INDICATOR: false,
+                  CONNECTION_INDICATOR_AUTO_HIDE_ENABLED: false,
+                  HIDE_INVITE_MORE_HEADER: true,
+                  <%#*MOBILE_APP_PROMO: false,%>
+               TOOLBAR_BUTTONS: [
+        'microphone', 'camera', 'closedcaptions', 'desktop', 'fullscreen',
+        'fodeviceselection', 'hangup', 'etherpad',
+        'settings', 'raisehand','chat',
+        'filmstrip', 'stats','recording','videobackgroundblur',
+         'download', 'videoquality',
+        'tileview', 'mute-everyone'],
+              <%#*VIDEO_LAYOUT_FIT: 'width'%>
+    },
+              configOverwrite: {
+                 disableDeepLinking: true,
+                 enableWelcomePage: false,
+                 prejoinPageEnabled: false,
+                 disableAudioLevels: false,
+                 enableNoAudioDetection: false,
+                 enableNoisyMicDetection: false,
+                 resolution: 360
+              }
+                  };
+            var api = new JitsiMeetExternalAPI(domain, options);
+            api.executeCommand('subject', 'Анализатор LANG');
+            <%#*api.executeCommand('setVideoQuality', 320);%>
+            api.executeCommand('displayName', 'Konstantin');
+        </script>
+        <% else %>
+        <script>
+            var domain = "meet.jit.si";
+            var options = {
+                roomName: "775641312",
+                width: 360,
+                height: 480,
+                interfaceConfigOverwrite: {
+                  <%#*DEFAULT_REMOTE_DISPLAY_NAME: 'Student',%>
+      SHOW_JITSI_WATERMARK: false,            
+      SHOW_WATERMARK_FOR_GUESTS: true,
+                  SHOW_POWERED_BY: false,
+                  SHOW_DEEP_LINKING_IMAGE: false,
+                  GENERATE_ROOMNAMES_ON_WELCOME_PAGE: false,
+                  DISPLAY_WELCOME_PAGE_CONTENT: false,
+                  INVITATION_POWERED_BY: false,
+                  SHOW_CHROME_EXTENSION_BANNER: false,
+                  CONNECTION_INDICATOR_AUTO_HIDE_TIMEOUT: 2000,
+                  INITIAL_TOOLBAR_TIMEOUT: 40000,
+                  TOOLBAR_TIMEOUT: 40000,                  
+                  <%#*MOBILE_APP_PROMO: false,%>
+               TOOLBAR_BUTTONS: [
+        'microphone', 'camera', 'closedcaptions', 'fullscreen',
+        'fodeviceselection', 'hangup', 'etherpad',
+        'settings', 'raisehand','chat',
+        'filmstrip', 'stats',
+        'tileview', 'mute-everyone'],
+              <%#*VIDEO_LAYOUT_FIT: 'both'%>
+    },
+              configOverwrite: {
+                 disableDeepLinking: true,
+                 enableWelcomePage: false,
+                 prejoinPageEnabled: false,
+                 enableNoAudioDetection: false,
+                 enableNoisyMicDetection: false
+              }
+                  };
+            var api = new JitsiMeetExternalAPI(domain, options);
+            api.executeCommand('subject', 'Анализатор LANG');
+            <%#*api.executeCommand('setVideoQuality', 320);%>
+            api.executeCommand('displayName', 'Konstantin');
+        </script>
+        <% end %>
+    </body>
+    
+<%#*</div>%>
+    
+    <%#=render(:partial => "lesson/jitsi_admin")%>
+        

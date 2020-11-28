@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+      <h3><%= @name %>, добро пожаловать на анализатор LANG!</h3>
+      <br/>
+      <% unless @password.blank? %>
+        <p>
+          Ура, у Вас уже есть доступ в <a href="<%= ActionMailer::Base.default_url_options[:host] %>/users/sign_in" target="_blank">личный кабинет</a>!<br/>
+          <b>логин:</b> <%= @email %><br/>
+          <b>пароль:</b> <%= @password %>
+          <br/>Вы можете сменить пароль в настройках в личном кабинете.
+        </p>
+      <% end %>
+      
+      <p>Приятной учебы!</p>
+      <br/>
+      <p>С уважением,<br/>команда LANG</p>
+  </body>
+</html>

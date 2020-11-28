@@ -1,0 +1,57 @@
+<div class="col-sm-12">
+  <div class="box">
+    <div class="box-header">
+      <h2><i class="fa fa-align-justify"></i><span class="break"></span>Отчеты об ошибках</h2>
+    </div>
+    <div class="box-content">
+      
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Дата добавления</th>
+            <th>Пользователь</th>
+            <th>Сообщение</th>
+            <th></th>
+          </tr>
+        </thead>   
+        <tbody>                                
+
+        <% @error_reports.each do |report| %>                                
+          <tr>
+            <td><%= report.created_at %></td>
+            <td><%= report.user.name %></td>
+            <td><%= truncate(report.description, length: 180, separator: ' ') %></td>
+            <td>
+              <% if report.file? %>
+                <a class="btn btn-default" href="<%= report.file.url %>" target="_blank"><i class="fa fa-file-image-o"></i></a>
+              <% end %>
+              <a class="btn btn-info" href="<%= admin_error_report_path(report) %>"><i class="fa fa-edit "></i></a>
+            </td>
+          </tr>
+        <% end %>                                  
+        </tbody>
+      </table>     
+      <%= render 'application/paginator', :count => @pages_count, :current => @current_page %> 
+      
+    </div>
+  </div>
+</div><!--/col-->
+
+<div class="col-sm-12">
+  <div class="box">
+    <div class="box-header">
+      <h2><i class="fa fa-align-justify"></i><span class="break"></span>Соединения</h2>
+    </div>
+    <div class="box-content">
+      
+        <% WebsocketRails.users.users.each do |id, user| %>   
+          <%= user.user.name %>
+          <% user.connections.each do |connection| %>   
+            <%= connection %>
+          <% end %>
+          <br/>
+        <% end %>
+      
+    </div>
+  </div>
+</div><!--/col-->

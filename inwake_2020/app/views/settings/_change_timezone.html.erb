@@ -1,0 +1,28 @@
+<%= form_for current_user, url: user_settings_update_path do |f| %>
+
+  <% if @timezone_message %>
+    <div class="alert alert-success alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only"><%= t('general.close') %></span></button>
+      <%= t(@timezone_message) %>
+    </div>
+  <% end %>
+
+  <div class="form-group <%= if current_user.errors.has_key?(:time_zone) then 'has-error' end %>">
+    <label class="control-label" for="locale"><%= f.label :locale %></label>
+    <div class="controls">
+        <%= f.collection_select :locale, User::LOCALES, :to_s, :humanize, {:prompt => 'None'}, :class => 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group <%= if current_user.errors.has_key?(:time_zone) then 'has-error' end %>">
+    <label class="control-label" for="text"><%= f.label :time_zone %></label>
+    <div class="controls">
+      <%= f.time_zone_select :time_zone, nil, {:default => "UTC"}, :class => 'form-control' %>
+    </div>
+  </div>
+  
+  <div class="form-actions">
+    <%= f.submit "#{t('users.change_timezone')}", class: "btn btn-primary" %>
+  </div>
+
+<% end %>

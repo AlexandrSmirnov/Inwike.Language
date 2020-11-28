@@ -1,0 +1,81 @@
+<div class="box" data-id="<%= homework.id %>" data-warning-time="<%= homework.warning_time? %>">
+  <div class="box-header">
+    <h2><i class="fa fa-briefcase"></i><span class="break"></span><%= t('homework.homework_on') %> <%= DateTime.strptime(homework.time.to_s, '%s').in_time_zone(Time.zone).strftime('%d %B')  %></h2>
+  </div>    
+  <div class="box-content">
+
+    <div class="time-box">
+      <div class="time-box__small"><%= t('homework.deadline') %></div>
+      <div class="time-box__title"><%= DateTime.strptime(homework.time.to_s, '%s').in_time_zone(Time.zone).strftime('%d.%m.%Y %H:%M') %></div>
+    </div>
+    <div class="add-button-box">
+      <% unless homework.elapsed? %>
+        <a href="javascript:addElement()" class="btn btn-small"><i class="fa fa-plus"></i> <%= t('homework.add_task') %></a>
+      <% end %>
+    </div>  
+
+    <h2 class="task-title"><i class="fa fa-tasks"></i> <%= t('homework.tasks') %></h2>
+    <ul class="todo-list">
+      <% tasks.each do |task| %>        
+        <li class="todo-element" data-id="<%= task.id %>" data-done="<%= if task.is_done then true else false end %>">
+          <% unless homework.elapsed? %>
+            <input <%= if task.is_done then "checked=checked" end %> type="checkbox" class="todo-checkbox" name="task-<%= task.id %>" <%= unless homework.elapsed? then "onchange=toggleElement(#{task.id});" end %>>                    
+          <% end %>
+          <div class="todo-title todo-text_clickable <%= if task.is_done then 'todo-text_done' end %>" <%= unless homework.elapsed? then "onclick=toggleElement(#{task.id});" end %>><%= task.title %></div>
+          <div class="todo-text todo-text_clickable <%= if task.is_done then 'todo-text_done' end %>" <%= unless homework.elapsed? then "onclick=toggleElement(#{task.id});" end %>><%= if task.text then task.text.bbcode_to_html.html_safe end %></div>          
+                  
+          <% unless homework.elapsed? %>
+            <span class="todo-actions">
+              <a class="todo-actions__button todo-attach-file" href="javascript:attachFile(<%= task.id %>)"><i class="fa fa-paperclip"></i></a>
+              <!--<a class="todo-actions__button todo-attach-voice" href="javascript:attachVoice(<%= task.id %>)"><i class="fa fa-microphone"></i></a>-->        
+          
+              <% if !homework.elapsed? and task.by_student %>
+                <a class="todo-actions__button todo-edit" href="javascript:editElement(<%= task.id %>)"><i class="fa fa-pencil"></i></a>
+                <a class="todo-actions__button todo-remove" href="javascript:deleteElement(<%= task.id %>)"><i class="fa fa-times"></i></a>
+              <% end %>
+            </span>
+          <% end %>
+          
+          <div class="todo-files">
+          <% task.homework_file.each do |file| %>
+            <div class="todo-files_element" data-id="<%= file.id %>">
+              <a class="label label-<%= if file.user.has_role?('tutor') then 'warning' else 'info' end %>" target="_blank" href="<%= file.file.url %>"><i class="fa fa-file"></i> <%= URI.decode(File.basename(file.file.url)) %></a>
+              <b><%= file.title %></b>
+              <i>(<%= number_to_human_size(file.file.size) %>)</i>          
+              <% if current_user.id == file.user_id %>
+                <a href="javascript:deleteFile(<%= file.id %>)" title="<%= t('general.delete') %>"> <i class="fa fa-times"></i></a>
+              <% end %>
+            </div>
+          <% end %>
+          </div>
+          
+        </li>
+      <% end %>
+    </ul>
+    
+    <div class="todo-empty <%= if tasks.count != 0 then 'hidden' end %>">
+      <%= t('homework.no_tasks') %>
+    </div>
+    
+    <h2 class="comments-title"><i class="fa fa-comment"></i> <%= t('homework.comments') %></h2>
+    <textarea class="comments-input comments-input_inactive" id="commentInput" placeholder="<%= t('homework.write_comment') %>" onclick="showNewComment();"></textarea>
+    <div class="comments-buttons" id="commentButtons">
+      <button id="sendCommentButton" class="btn btn-info" onclick="addComment();"><%= t('general.send') %></button>
+      <button id="closeCommentButton" class="btn btn-default" onclick="hideNewComment();"><%= t('general.cancel') %></button>
+    </div>
+    
+    <ul class="comments-list">
+      <% comments.each do |comment| %>      
+        <li class="comments-element" data-id="<%= comment.id %>">
+          <span class="comments-element__user"><%= comment.user.name %></span>
+          <span class="comments-element__time"><%= comment.created_at.strftime("%d.%m.%Y %H:%M") %></span>
+          <% if current_user.id == comment.user_id %>
+            <a href="javascript:deleteComment(<%= comment.id %>)" title="<%= t('general.delete') %>"> <i class="fa fa-times"></i></a>
+          <% end %>
+          <div class="comments-element__text"><%= comment.text %></div>
+        </li>
+      <% end %>	
+    </ul>
+    
+  </div>      
+</div>   

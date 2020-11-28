@@ -1,0 +1,3 @@
+module Student::PaymentsHelper
+  
+end

@@ -1,0 +1,258 @@
+.services {
+    color: #ffffff;
+}
+
+.service-box {    
+    padding: 32px 170px 32px 32px;
+    margin-bottom: 40px;
+    position: relative;
+    overflow: hidden;
+}
+
+.service-box:after {
+    font-family: 'icomoon';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    
+    position: absolute;    
+    font-size: 260px;
+}
+
+.service-box_left {
+    background: #F5A623;
+    
+}
+@media (min-width: 992px) {
+    .service-box_left {
+        margin-right: 14px;
+    }
+}
+
+.service-box_left:after {
+    content: "\e61d";
+    right: -100px;
+    bottom: -10px;
+}
+
+.service-box_right {
+    background: #7EC354;
+}
+@media (min-width: 992px) {
+    .service-box_right {
+        margin-left: 14px;
+    }
+}
+
+.service-box_right:after {
+    content: "\e60e";
+    font-size: 250px;
+    right: -125px;
+    bottom: -5px;
+}
+/*Стили для предметов ЕГЭ:*/
+.service-box_left_ege {
+    background: #F5A623;
+    
+}
+@media (min-width: 992px) {
+    .service-box_left_ege {
+        margin-right: 14px;
+    }
+}
+
+.service-box_left_ege:after {
+    content: "\e612";
+    font-size: 160px;
+    right: 5px;
+    bottom: 25px;
+}
+
+.service-box_right_ege {
+    background: #2aa2b4;
+}
+@media (min-width: 992px) {
+    .service-box_right_ege {
+        margin-left: 14px;
+    }
+}
+
+.service-box_right_ege:after {
+    content: "\e615";
+    font-size: 135px;
+    right: 10px;
+    bottom: 25px;
+}
+.service-box_left_bottom {
+    background: #54c5d7;
+    
+}
+@media (min-width: 992px) {
+    .service-box_left_bottom {
+        margin-right: 14px;
+    }
+}
+
+.service-box_left_bottom:after {
+    content: "\e616";
+    font-size: 140px;
+    right: 10px;
+    bottom: 25px;
+}
+
+.service-box_right_bottom {
+    background: #7EC354;
+}
+@media (min-width: 992px) {
+    .service-box_right_bottom {
+        margin-left: 14px;
+    }
+}
+
+.service-box_right_bottom:after {
+    content: "\e60c";
+    font-size: 145px;
+    right: 10px;
+    bottom: 25px;
+}
+
+.service-box_left_bottom2 {
+    background: #0077b3;
+    
+}
+@media (min-width: 992px) {
+    .service-box_left_bottom2 {
+        margin-right: 14px;
+    }
+}
+
+.service-box_left_bottom2:after {
+    content: "\e607";
+    font-size: 140px;
+    right: 10px;
+    bottom: 25px;
+}
+
+.service-box_right_bottom2 {
+    background: #ff2121;
+}
+@media (min-width: 992px) {
+    .service-box_right_bottom2 {
+        margin-left: 14px;
+    }
+}
+
+.service-box_right_bottom2:after {
+    content: "\e60e";
+    font-size: 145px;
+    right: 10px;
+    bottom: 25px;
+}
+
+/*КОНЕЦ Стили для предметов ЕГЭ: КОНЕЦ*/
+.service-title {
+    font-size: 22px;
+    font-weight: 500;
+    margin: 0 0 25px;
+    text-transform: uppercase;
+}
+
+.service-descr {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 28px;
+}
+
+.service-descr_list {
+    padding-left: 16px;
+    font-size: 20px;
+    margin: 40px 0 25px;
+}
+
+.service-element {
+    margin: 5px 0;
+}
+
+.service-element__link {
+    color: #ffffff;
+}
+
+.service-button {
+    margin: 22px 0 0;
+    background: #ffffff;
+    color: #fb7b20;
+}
+
+.service-button:hover {
+    background: #f6f6f6;
+}
+    
+.services-special-header {
+    margin-top: 20px;
+}    
+
+.services-special-row {
+    margin-left: -7px;
+    margin-right: -7px;
+}
+
+.services-special-container {
+    padding: 7px;
+}
+
+.services-special-element {
+    background: #54c5d7;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    color: #ffffff;
+}
+
+.services-special-element:hover {
+    background: #2aa2b4;
+}
+
+.services-special-title {
+    height: 38px;
+    line-height: 38px;
+    margin: 0 0 15px;
+    font-size: 15px;
+}
+
+.services-special-title__text {
+    display: inline-block;
+    line-height: 20px;
+}
+
+.services-special-icon {
+    font-size: 90px;
+    line-height: 120px;
+}
+
+.services-special-marathon {
+    background: rgba(0, 0, 0, 0) image-url("marathon-road.png") repeat-x scroll 0 0;
+    height: 45px;
+    position: relative;
+    margin: 0 8px;
+}
+
+.services-special-marathon__icon {
+    background: #54c5d7;
+    bottom: 0;
+    font-size: 50px;
+    left: 21%;
+    padding: 0 8px;
+    position: absolute;
+}
+
+.services-special-element:hover .services-special-marathon__icon {
+    background: #2aa2b4;
+}

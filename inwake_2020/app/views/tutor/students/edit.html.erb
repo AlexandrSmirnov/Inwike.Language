@@ -1,0 +1,29 @@
+<div class="col-sm-<%= my? && @student.lease ? '8' : '12' %>">
+  <div class="box">
+    <div class="box-header">
+      <h2><i class="fa fa-pencil-square-o"></i><span class="break"></span><%= @student.name  %></h2>
+    </div>
+    <div class="box-content">
+      <% if @student.lease %>
+        <%= render 'form_new' %>
+      <% else %>  
+        <%= render 'form' %>      
+      <% end %>  
+    </div>
+  </div>
+</div>
+
+<% if my? && @student.lease %>
+  <div class="col-sm-4">
+    <div class="box">
+      <div class="box-header">
+        <h2><i class="fa fa-graduation-cap"></i><span class="break"></span>Типы занятий</h2>
+      </div>
+      <div class="box-content">
+
+        <%= render 'class_types' %>             
+
+      </div>    
+    </div>  
+  </div>
+<% end %>

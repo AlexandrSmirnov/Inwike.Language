@@ -1,0 +1,5 @@
+      <%=
+        if (current_user.has_role? :admin)
+          render 'users_main'
+        end
+      %>  

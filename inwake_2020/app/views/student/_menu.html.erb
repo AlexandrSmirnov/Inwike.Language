@@ -1,0 +1,16 @@
+<ul class="nav nav-tabs nav-stacked main-menu <%= current_user.has_role?(:admin) ? 'hidden' : '' %>" data-role="student">
+  <li>
+    <a target="_blank" href="<%= student_calendar_index_path %>"><i class="fa fa-calendar"></i><span class="hidden-sm"> <%= t('calendar.calendar') %></span></a>
+  </li>      
+  <li>
+    <a href="<%= student_lesson_path %>" id="lesson-menu-link"><i class="fa fa-paper-plane-o"></i><span class="hidden-sm"> <%= t('lesson.lesson') %></span></a>
+  </li>           
+  <% if current_user.quizlet_id %>
+    <li>
+      <a href="<%= student_flashcards_path %>"><i class="fa fa-th-large"></i><span class="hidden-sm"> Флеш-карточки</span></a>
+    </li>    
+  <% end %>        
+  <li>
+    <a target="_blank" href="<%= student_homework_index_path %>"><i class="fa fa-briefcase"></i><span class="hidden-sm"> <%= t('homework.homework') %></span></a>
+  </li>    
+</ul>

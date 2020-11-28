@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+    <title>LANG</title>
+    <%= favicon_link_tag 'favicon.ico' %>
+        
+    <!-- All styles -->
+    <%= stylesheet_link_tag "public_styles" %>   
+
+  </head>
+        
+  <body>
+				
+    <div class="wrapper wrapper_full-screen wrapper_hidden-footer">
+      <div class="screen screen_hidden-footer">
+        
+        <%= render(:partial => "layouts/header") %>
+
+        <section class="mission-box mission-box_no-margin wow pulse">
+          <div class="container">
+            <div class="row">
+              <div class="mission text-center col-xs-12 col-lg-9 ">
+                <span class="mission-text">
+                  <p class="mission-text__paragraph cd-headline rotate-1">
+                    <%= t("main.header.start").html_safe %>
+                    <span class="cd-words-wrapper dark-blue"><!--
+                            --><b class="is-visible"><%= t("main.header.phrase_1") %></b><b>&nbsp;&nbsp; <%= t("main.header.phrase_2") %></b><b>&nbsp; <%= t("main.header.phrase_4") %></b><b>&nbsp; <%= t("main.header.phrase_5") %></b><!--
+                    --></span> <%= t("main.header.end") %>
+                  </p>
+                </span>
+                  
+                <%#= render(:partial => "requests/form_min") %> 
+                  
+              </div>
+            </div>
+          </div>
+        </section>
+
+				
+        <section class="cards-box container">
+          <div class="row">
+                        
+            <div class="thesis-card col-xs-12 col-sm-4 col-lg-3">
+              <div class="card-wrapper card-wrapper_sensible">
+                <div class="thesis card-front"> 
+                        <h3 class="thesis__title"><%= t("main.theses.instructors.title").html_safe %></h3>
+                        <img class="thesis__img" src="<%= image_path('thesis_experts.png') %>"/>
+
+                </div>
+                <div class="thesis thesis_back card-back">
+                        <h3 class="thesis__title thesis__title_red thesis__title_less-margin"><%= t("main.theses.instructors.title").html_safe %></h3>
+                        <ul class="thesis-list">
+                                <li class="thesis-list__element thesis-list__element_red"><%= t("main.theses.instructors.thesis1").html_safe %></li>
+                                <li class="thesis-list__element thesis-list__element_red"><%= t("main.theses.instructors.thesis2").html_safe %></li>
+                                <li class="thesis-list__element thesis-list__element_red"><%= t("main.theses.instructors.thesis3").html_safe %></li>
+                                <li class="thesis-list__element thesis-list__element_red"><%= t("main.theses.instructors.thesis4").html_safe %></li>
+                        </ul>
+
+                </div>	
+                <noindex>
+                        <div class="thesis invisible">
+                                <h3 class="thesis__title"><%= t("main.theses.instructors.title").html_safe %></h3>
+   
+                        </div>	
+                </noindex>
+              </div>			
+            </div>
+            
+            <div class="thesis-card col-xs-12 col-sm-4 col-lg-3">
+              <div class="card-wrapper card-wrapper_sensible">
+                <div class="thesis card-front">
+                        <h3 class="thesis__title"><%= t("main.theses.platform.title").html_safe %></h3>
+    
+                </div>
+                <div class="thesis thesis_back card-back">
+                        <h3 class="thesis__title thesis__title_green thesis__title_less-margin"><%= t("main.theses.platform.title").html_safe %></h3>
+                        <ul class="thesis-list">
+                                <li class="thesis-list__element"><%= t("main.theses.platform.thesis1").html_safe %></li>
+                                <li class="thesis-list__element"><%= t("main.theses.platform.thesis2").html_safe %></li>
+                                <li class="thesis-list__element"><%= t("main.theses.platform.thesis3").html_safe %></li>
+                                <li class="thesis-list__element"><%= t("main.theses.platform.thesis4").html_safe %></li>
+                        </ul>
+
+                        <div class="text-center thesis-button_back">									
+              
+                        </div>
+                </div>	
+                <noindex>
+                        <div class="thesis invisible">
+                                <h3 class="thesis__title"><%= t("main.theses.platform.title").html_safe %></h3>
+  
+                        </div>	
+                </noindex>
+              </div>		
+            </div>
+            
+            <div class="thesis-card col-xs-12 col-sm-4 col-lg-3">
+              <div class="card-wrapper card-wrapper_sensible">
+                <div class="thesis card-front">
+                        <h3 class="thesis__title"><%= t("main.theses.methods.title").html_safe %></h3>
+   
+                </div>
+                <div class="thesis thesis_back card-back">
+                        <h3 class="thesis__title thesis__title_orange thesis__title_less-margin"><%= t("main.theses.methods.title").html_safe %></h3>
+                        <ul class="thesis-list">
+                                <li class="thesis-list__element thesis-list__element_orange"><%= t("main.theses.methods.thesis1").html_safe %></li>
+                                <li class="thesis-list__element thesis-list__element_orange"><%= t("main.theses.methods.thesis2").html_safe %></li>
+                                <li class="thesis-list__element thesis-list__element_orange"><%= t("main.theses.methods.thesis3").html_safe %></li>
+                                <li class="thesis-list__element thesis-list__element_orange"><%= t("main.theses.methods.thesis4").html_safe %></li>
+                        </ul>
+
+                        <div class="text-center thesis-button_back">									
+       
+                        </div>
+                </div>	
+                <noindex>
+                        <div class="thesis invisible">
+                                <h3 class="thesis__title"><%= t("main.theses.methods.title").html_safe %></h3>
+                                <img class="thesis__img" src="<%= image_path('thesis_teaching.png') %>"/>
+                
+                        </div>	
+                </noindex>
+              </div>	
+            </div>
+            
+          </div>
+        </section>
+				
+        <%#*<div class="girl-with-book visible-lg"> </div>%>
+      </div>
+      
+      
+      <%= render 'layouts/footer', :footer_class => 'footer_hidden' %>
+
+    </div>
+    
+    <!-- Plugins styles -->    
+    <%= stylesheet_link_tag "public_styles_plugins" %>
+      
+    <!-- Javascript -->    
+    <%= javascript_include_tag "application" %>
+
+  </body>
+</html>

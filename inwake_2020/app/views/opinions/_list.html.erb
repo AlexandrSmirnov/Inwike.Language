@@ -1,0 +1,56 @@
+<% 
+  if defined?(tutor_id)
+    opinions_count = Opinion.find_all_by_tutor_id(tutor_id).count
+    opinions = Opinion.order("RAND()").find_all_by_tutor_id(tutor_id)
+  else
+    opinions_count = Opinion.find_all_by_service_id(service_id).count
+    opinions = Opinion.order("RAND()").find_all_by_service_id(service_id)    
+  end
+%>
+
+
+<% if opinions_count > 0 %>
+
+  <div class="box-reviews">
+
+    <div class="container">        
+      <div class="row">
+        <hr class="delimiter margin-top-50">
+        <h2 class="header-1 col-xs-12"><%= t('main.opinions') %></h2>
+      </div>
+      <div class="reviews-list row">
+
+        <div class="opinions-carousel col-xs-12">        
+          <% i = 0 %>
+          <% opinions.each do |opinion| %>      
+            <% if i % 2 == 0 %>
+              <% if i != 0 %>
+                </div>
+              <% end %>
+              <div class="opinions-carousel-element">
+            <% end %>
+              <div class="review-element">
+                <div class="review-element__icon"><i class="icon-comment"></i></div>
+                <div class="review-element__text">
+                <%= opinion.text %>
+                </div>
+                <div class="review-element__user">
+                  <%= opinion.student_name %>
+
+                  <!--
+                  <% unless opinion.progress.blank? %>
+                    (<%= opinion.progress %>)
+                  <% end %>
+                  -->
+                </div>
+              </div>
+            <% i = i + 1 %>
+          <% end %>
+        </div>
+
+      </div>    
+    </div>    
+
+  </div>
+
+<% end %>

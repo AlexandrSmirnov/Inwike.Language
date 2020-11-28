@@ -1,0 +1,27 @@
+<%= form_for [:tutor, @student] do |f| %>
+
+  <% if @student.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@student.errors.count, "error") %> prohibited
+        this article from being saved:</h2>
+      <ul>
+      <% @student.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <label class="control-label" for="quizlet_id"><%= f.label :quizlet_id %></label>
+    <div class="controls">
+        <%= f.text_field :quizlet_id, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit "#{t('general.save')}", class: "btn btn-primary" %>
+    <%= link_to "#{t('general.return')}", tutor_users_path, class: "btn" %>
+  </div>
+
+<% end %>

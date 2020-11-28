@@ -1,0 +1,15 @@
+      <%=
+        if ((current_user.has_role? :admin) && (current_user.roles.count > 1))
+            render(:partial => "lesson/menu_also_admin")
+        end
+      %>
+      <%=
+        if ((current_user.has_role? :admin) && (current_user.roles.count < 2))
+            render(:partial => "lesson/menu_only_admin")
+        end
+      %>
+      <%=
+        if (current_user.has_role? :tutor) && (current_user.roles.count < 2)
+          render(:partial => "lesson/menu_only_tutor")
+        end
+      %>  

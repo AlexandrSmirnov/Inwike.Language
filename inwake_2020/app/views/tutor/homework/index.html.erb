@@ -1,0 +1,30 @@
+<div class="col-sm-7" id="homework_window">
+  <% if @nearest_homework %>
+    <%= render 'tasks', :homework => @nearest_homework, :tasks => @nearest_tasks, :comments => @nearest_comments %>  
+  <% end %>
+</div>
+
+<div class="col-sm-5 dark">
+  <div class="graph">
+    <h1 class="homework-title">Ваши уроки:</h1>
+    
+    <ul class="nav nav-pills tabs">
+      <li class="tab-element"><a class="tab-element__link tab-actual-link tab-element__link_active" href="javascript:showActual();"><%= t('homework.actual') %></a></li>
+      <li class="tab-element"><a class="tab-element__link tab-archive-link" href="javascript:showArchive();"><%= t('homework.archive') %></a></li>
+    </ul>
+    
+    <br class="clear">
+    
+    <div class="timeline">
+      <script>
+        document.title = 'Дневник';
+      </script>        
+      <%= render 'homeworks', :homeworks => @homeworks, :nearest_homework => @nearest_homework %>
+    </div>
+
+  </div>
+</div><!--/col-->	
+
+<%= javascript_include_tag "homework" %>
+<%= javascript_tag "var AUTH_TOKEN = '#{form_authenticity_token}';" if protect_against_forgery? %>
+<%= javascript_tag "var HOMEWORK_PATH = '#{tutor_homework_index_path}';" %>

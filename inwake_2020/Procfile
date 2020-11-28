@@ -1,0 +1,3 @@
+web: rails server
+worker: bundle exec rake resque:work PIDFILE=./tmp/pids/resque_work.pid QUEUE=* 
+scheduler: bundle exec rake resque:scheduler PIDFILE=./tmp/pids/resque_scheduler.pid

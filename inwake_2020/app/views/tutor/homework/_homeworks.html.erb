@@ -1,0 +1,67 @@
+<%
+  side = 'left'
+%>
+<% homeworks.each do |homework| %>
+  <%
+    date = DateTime.strptime(homework.time.to_s, '%s').in_time_zone(Time.zone).strftime('%d %B %Y')
+
+    active = false
+    if nearest_homework and nearest_homework.id == homework.id
+      active = true              
+    end
+  %>
+  <% if homework.elapsed? %>
+    <div class="timeslot timeslot_low" data-id="<%= homework.id %>" data-class="<%= homework.homework_class %>" data-warning-time="false">
+      <div class="timeslot-task timeslot-task_<%= side %>">
+        <div class="timeslot-text">
+          <div class="timeslot-text__title"><%= homework.student.name %></div>
+        </div>
+        <div class="timeslot-arrow timeslot-arrow_<%= side %>">
+          <div class="timeslot-arrow__inline timeslot-arrow__inline_<%= side %>"></div>
+        </div>
+      </div>							
+      <div onclick="showHomework(<%= homework.id %>);" class="timeslot-icon timeslot-icon_large <%= if active then 'timeslot-icon_active' end %>" title="<%= t(homework.homework_tip) %>">
+        <i class="fa <%= homework.homework_icon %>"></i>
+        <canvas class="timeslot-icon__canvas" width="42" height="42" data-progress="<%= homework.homework_progress %>"></canvas>
+      </div>
+      <div class="timeslot-time timeslot-time_<%= side %>"><%= date %></div>
+    </div>
+  <% elsif homework.in_progress? %>
+    <div class="timeslot timeslot_low" data-id="<%= homework.id %>" data-class="<%= homework.homework_class %>" data-warning-time="<%= homework.warning_time? %>">
+      <div class="timeslot-task timeslot-task_<%= side %>">
+        <div class="timeslot-text <%= if active then "timeslot-#{homework.homework_class}" end %>">
+          <div class="timeslot-text__title"><%= homework.student.name %></div>
+        </div>
+        <div class="timeslot-arrow timeslot-arrow_<%= side %>">
+          <div class="timeslot-arrow__inline timeslot-arrow__inline_<%= side %> <%= if active then "timeslot-#{homework.homework_class}" end %>"></div>
+        </div>
+      </div>							
+      <div onclick="showHomework(<%= homework.id %>);" class="timeslot-icon timeslot-icon_large timeslot-icon_<%= homework.homework_class %> <%= if active then 'timeslot-icon_active' end %>" title="<%= t(homework.homework_tip) %>">
+        <i class="fa <%= homework.homework_icon %>"></i>
+        <canvas class="timeslot-icon__canvas" width="42" height="42" data-progress="<%= homework.homework_progress %>"></canvas>
+      </div>
+      <div class="timeslot-time timeslot-time_<%= side %> <%= if active then "timeslot-#{homework.homework_class}" end %>"><%= date %></div>
+    </div>        
+  <% else %>            
+    <div class="timeslot" data-id="<%= homework.id %>" data-class="<%= homework.homework_class %>" data-warning-time="<%= homework.warning_time? %>">
+      <div class="timeslot-task timeslot-task_<%= side %>">
+        <div class="timeslot-text <%= if active then "timeslot-#{homework.homework_class}" end %>">
+          <div class="timeslot-text__title"><%= homework.student.name %></div>
+          <div class="timeslot-text__remaining"><%= t('homework.time_remaining') %></div> 
+          <div class="timeslot-text__time"><%= time_left_text(homework.time - Time.now.to_i) %></div>	
+        </div>
+        <div class="timeslot-arrow timeslot-arrow_<%= side %>">
+          <div class="timeslot-arrow__inline timeslot-arrow__inline_<%= side %> <%= if active then "timeslot-#{homework.homework_class}" end %>"></div>
+        </div>
+      </div>							
+      <div onclick="showHomework(<%= homework.id %>);" class="timeslot-icon timeslot-icon_large timeslot-icon_<%= homework.homework_class %>" title="<%= t(homework.homework_tip) %>">
+        <i class="fa <%= homework.homework_icon %>"></i>
+        <canvas class="timeslot-icon__canvas" width="42" height="42" data-progress="<%= homework.homework_progress %>"></canvas>
+      </div>
+      <div class="timeslot-time timeslot-time_<%= side %> <%= if active then "timeslot-#{homework.homework_class}" end %>"><%= date %></div>
+    </div>        
+  <% end %>     
+
+  <% side = if side == 'right' then 'left' else 'right' end %>
+
+<% end %>

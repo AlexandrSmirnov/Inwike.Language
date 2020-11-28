@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title><%= yield(:title) %></title>
+    <%= favicon_link_tag 'favicon.ico' %>
+        
+    <!-- All styles -->
+    <%= stylesheet_link_tag "public_styles" %>
+  </head>
+        
+  <body>
+    <div class="wrapper">
+      
+      <%= render 'layouts/header', :nav_class => 'nav-box_margins' %>			
+      
+      <div class="page">
+        <div class="container">
+          <div class="page-top">
+            <div class="content-top row">
+              <%= render_breadcrumbs :builder => ::BreadcrumbsBuilder, :class_main => 'col-sm-8 col-xs-12', :class_postfix => 'dark' %>
+              <div class="page-controls hidden-xs col-sm-4 text-right">
+                <!--<a href="#" class="page-controls__element"><i class="icon-printer"></i> Распечатать страницу</a>-->
+              </div>
+            </div>					
+            <div class="content-header  row">
+              <h1 class="header-2 margins-no-top col-xs-12"><%= yield(:h1) %></h1>
+            </div>
+          </div>
+            
+          <%= yield %>
+        </div>
+      </div>
+
+    </div>		
+
+    <%= render 'layouts/footer' %>
+              
+    <!-- Plugins styles -->    
+    <%= stylesheet_link_tag "public_styles_plugins" %>
+      
+    <!-- Javascript -->    
+    <%= javascript_include_tag "application" %>
+
+  </body>
+</html>

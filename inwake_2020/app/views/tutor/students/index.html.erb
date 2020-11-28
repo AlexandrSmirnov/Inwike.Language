@@ -1,0 +1,77 @@
+<div class="col-sm-<%= my? ? '6' : '12' %>">
+  <div class="box">
+    <div class="box-header">
+      <h2><i class="fa fa-align-justify"></i><span class="break"></span><%= t('students.students') %></h2>
+    </div>
+    <div class="box-content">
+      <% if current_user.lease || my? %>
+        <a class="btn btn-success" href="<%= new_tutor_user_path %>"><i class="fa fa-plus"></i> <%= t('students.add_student') %></a>
+      <% end %>  
+      
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th><%= t('students.name') %></th>
+            <th><%= t('students.last_activity') %></th>
+            <th> </th>
+          </tr>
+        </thead>   
+        <tbody>                                
+
+        <% @students.each do |student| %>                                
+          <tr>
+            <td><%= student.name %></td>
+            <td><%= student.current_sign_in_at %></td>   
+            <td>
+              <a class="btn btn-info" href="<%= edit_tutor_user_path(student) %>"><i class="fa fa-edit"></i></a>
+              <% if student.lease %>
+                <a class="btn btn-danger" href="<%= tutor_user_path(student) %>" data-method="delete" rel="nofollow" data-confirm="Do you really want to delete <%= student.name %>?"><i class="fa fa-trash-o "></i></a>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>                                  
+        </tbody>
+      </table>      
+      
+    </div>
+  </div>
+</div><!--/col-->
+
+<% if my? %>
+  <div class="col-sm-6">
+    <div class="box">
+      <div class="box-header">
+        <h2><i class="fa fa-align-justify"></i><span class="break"></span>Типы занятий</h2>
+      </div>
+      <div class="box-content">
+
+        <a class="btn btn-success" href="<%= new_tutor_class_type_path %>"><i class="fa fa-plus"></i> Добавить тип</a>
+        <br/>
+
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Название типа</th>
+              <th>Стоимость</th>
+              <th> </th>
+            </tr>
+          </thead>   
+          <tbody>                                
+
+          <% @class_types.each do |class_type| %>                                
+            <tr>
+              <td><%= class_type.name %></td>
+              <td><%= class_type.tutor_classes.first ? class_type.tutor_classes.first.cost : nil %></td>
+              <td>
+                <a class="btn btn-info" href="<%= edit_tutor_class_type_path(class_type) %>"><i class="fa fa-edit "></i></a>
+                <a class="btn btn-danger" href="<%= tutor_class_type_path(class_type) %>" data-method="delete" rel="nofollow" data-confirm="Действительно удалить?"><i class="fa fa-trash-o "></i></a>
+              </td>
+            </tr>
+          <% end %>                                  
+          </tbody>
+        </table>      
+
+      </div>
+    </div>
+  </div><!--/col-->  
+<% end %>   

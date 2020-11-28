@@ -1,0 +1,183 @@
+<div class="get-lesson-fader"> </div>
+<div class="get-lesson-modal animated">
+  <div class="get-lesson-content card-wrapper">
+    <div class="get-lesson-front card-front">
+      <div class="get-lesson-header">Знакомство с платформой <span class="request-animation-preloader"></span></div>
+            <%= form_for Request.new, url: request_create_path, :html => { :class => "get-lesson-form" } do |f| %>
+      
+                <div class="get-lesson-slide">
+                  <div class="get-lesson-text">
+                          Добро пожаловать! Как с Вами связаться?
+                  </div>
+                  <div class="row">
+                          <div class="col-sm-4">
+                              <div class="get-lesson-field">
+                                  <i class="get-lesson-field__icon icon-user"></i>
+                                  <%= f.text_field :name, class: "get-lesson-field__input", placeholder: t('main.your_name'), required: true %>
+                              </div>
+                          </div>
+                          <div class="col-sm-4">
+                              <div class="get-lesson-field">
+                                  <i class="get-lesson-field__icon icon-mobile"></i>
+                                  <%= f.phone_field :phone, class: "get-lesson-field__input get-lesson-field__input_phone", placeholder: t('main.your_phone'), required: true %>
+                              </div>
+                          </div>
+                          <div class="col-sm-4">
+                              <div class="get-lesson-field">
+                                  <i class="get-lesson-field__icon icon-letter"></i>
+                                  <%= f.email_field :email, class: "get-lesson-field__input", placeholder: t('main.your_email'), required: true %>
+                              </div>
+                          </div>				    
+                          <div class="col-sm-12 get-lesson-radiobox">
+                              <span class="get-lesson-radiolabel">Предпочтительный способ связи:</span>
+                              <label class="get-lesson-radio" for="request_communication_phone">
+                                  <%= f.radio_button :communication, 'phone', :class => 'get-lesson-radio__input', :checked => true %> 
+                                  <span class="get-lesson-radio__label"><%= t('main.your_phone') %></span>
+                              </label>
+                              <label class="get-lesson-radio" for="request_communication_email">
+                                  <%= f.radio_button :communication, 'email', :class => 'get-lesson-radio__input' %> 
+                                  <span class="get-lesson-radio__label"><%= t('main.your_email') %></span>
+                              </label>		
+                          </div>
+                  </div>			
+                </div>    
+      
+                <% if ege? %>
+                  <div class="get-lesson-slide hidden">
+                    <div class="get-lesson-text">
+                      <span class="get-lesson-username"></span>, что Вы хотите изучать?
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <% i = 0 %>  
+                        <%= collection_check_boxes(:request, :subjects, Request::SUBJECTS_EGE, :to_s, :to_s) do |b|         
+                              devide_by_columns i, Request::SUBJECTS_EGE.count, 4 do
+                                i = i + 1
+                                b.label(class: "get-lesson-field", for: "request_subjects_#{i}") { b.check_box(class: "get-lesson-field__checkbox", id: "request_subjects_#{i}") + "<span class=\"get-lesson-field__label\">#{b.text}</span>".html_safe }
+                                end    
+                            end
+                        %> 
+                      </div>
+                    </div>
+                  </div>       
+                <% end %>
+
+                <div class="get-lesson-slide hidden">
+                  <div class="get-lesson-text">
+                    <% if ege? %>
+                      Отлично, <span class="get-lesson-username"></span>! Каковы <b>цели</b> обучения?
+                    <% else %>
+                      Отлично, <span class="get-lesson-username"></span>! Каковы <b>цели</b> изучения языка?                      
+                    <% end %>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <% 
+                        aims = if ege? then Request::AIMS_EGE else Request::AIMS end 
+                        i = 0 
+                      %>  
+                      <%= collection_check_boxes(:request, :aims, aims, :to_s, :to_s) do |b|         
+                            devide_by_columns i, aims.count, 2 do
+                              i = i + 1
+                              b.label(class: "get-lesson-field", for: "request_aims_#{i}") { b.check_box(class: "get-lesson-field__checkbox", id: "request_aims_#{i}") + "<span class=\"get-lesson-field__label\">#{b.text}</span>".html_safe }
+                              end    
+                          end
+                      %>     
+                      <label class="get-lesson-field" for="request_aims_other">
+                        <%= check_box_tag 'request[aims][]', 'Другое', false, class: 'get-lesson-field__checkbox get-lesson-field__checkbox_expanded', id: 'request_aims_other' %>
+                        <%= text_field_tag 'request[aims][]', nil, {class: 'get-lesson-field__input get-lesson-field__input_small hidden', placeholder: 'Что именно?'} %>
+                        <span class="get-lesson-field__label">Другое</span>			      								
+                      </label>
+                    </div>                                        
+                  </div>
+                </div>    
+
+                <div class="get-lesson-slide hidden">
+                  <div class="get-lesson-text">
+                    <span class="get-lesson-username"></span>, выберите 3 <b>качества учителя</b> вашей мечты?
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <% 
+                        tutor_traits = if ege? then Request::TUTOR_TRAITS_EGE else Request::TUTOR_TRAITS end
+                        i = 0 
+                      %>  
+                      <%= collection_check_boxes(:request, :tutor_traits, tutor_traits, :to_s, :to_s) do |b|         
+                            devide_by_columns i, tutor_traits.count, 3 do
+                              i = i + 1
+                              b.label(class: "get-lesson-field", for: "request_tutor_traits_#{i}") { b.check_box(class: "get-lesson-field__checkbox get-lesson-field__checkbox_limit", data: {limit: 3}, id: "request_tutor_traits_#{i}") + "<span class=\"get-lesson-field__label\">#{b.text}</span>".html_safe }
+                              end    
+                          end
+                      %>                                
+                    </div>
+                  </div>
+                </div> 
+
+              <div class="get-lesson-slide hidden">
+                <div class="get-lesson-text">
+                  <span class="get-lesson-username"></span>, а <b>когда</b> Вам удобнее заниматься?
+                </div>
+                <div class="row get-lesson-time">
+                  <div class="col-sm-6">
+                      
+                    <% i = 0 %> 
+                    <% Request::DAYS.each do |key, item| %>  
+                      <%= devide_by_columns i, Request::DAYS.count, 2 do 
+                          i = i + 1
+                          content_tag(:div,
+                            content_tag(:span, item[:short], class: "get-lesson-radiolabel get-lesson-radiolabel_weekday " + if item.include?(:marked) && item[:marked] then "get-lesson-radiolabel_weekday-green" else '' end) + 
+                            collection_check_boxes('request[days]', key, Request::TIME, :first, :last) do |b|       
+                              b.label(class: "get-lesson-radio") { b.check_box(class: "get-lesson-radio__input") + "<span class=\"get-lesson-radio__label\">#{b.text}</span>".html_safe }
+                            end, class: "get-lesson-radiobox")
+                        end %>  
+                    <% end %>  
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="get-lesson-slide hidden">
+                  <div class="get-lesson-text">
+                    Хотите еще что-нибудь добавить?
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <% 
+                        comment_value = defined?(comment) ? comment : nil 
+                      %>
+                      <%= f.text_area :comments, :value => comment_value, class: "get-lesson-textarea", placeholder: "Комментарий" %>
+                    </div>
+                  </div>
+              </div>
+
+              <div class="get-lesson-submit row">
+                <div class="col-sm-4 get-lesson-indicator">
+                </div>
+                <div class="col-sm-8 text-right">
+                    <button type="submit" class="request-submit-button button button_orange" id="get-lesson-submit-button"><span class="request-submit-button__loader"></span> Отправить что есть</button>
+                    <button class="button button_green" id="get-lesson-next-button">Рассказать больше</button>
+                </div>
+              </div>
+        <% end %>
+
+    </div>
+    <div class="get-lesson-back card-back">
+        <div class="get-lesson-header">Спасибо, что уделили минутку!</div>
+        <div class="get-lesson-text get-lesson-text_rare">
+            <div class="row">
+                <div class="col-sm-7 col-xs-12">
+                    Администраторы уже ищут Вам преподавателя.<br/>
+                    Совсем скоро мы свяжемся с Вами!<br/><br/> 
+                    <b>Благодарим за проявленный интерес!</b>    
+                </div>
+                <div class="col-sm-5 hidden-xs">
+                <img src="<%= image_path('form_finish.png') %>" class="get-lesson-image">
+                </div>
+                <div class="get-lesson-bottom">
+                    <a class="button button_grey" href="javascript:closeFreeLessonForm();">Закрыть</a>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>

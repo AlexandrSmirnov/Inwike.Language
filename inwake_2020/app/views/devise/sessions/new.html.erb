@@ -1,0 +1,37 @@
+<div class="login-box">
+  <h2>Вход в личный кабинет</h2>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <fieldset>
+      <div class="input-wrap">
+        <div class="input-prepend input-group" title="email">
+                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'Логином является ваш e-mail' %>
+        </div>
+      </div>
+      <div class="input-wrap">
+        <div class="input-prepend input-group" title="Password">
+                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: 'Ваш пароль'  %>
+        </div>
+      </div>
+      
+      <% if devise_mapping.rememberable? -%>
+        <label class="remember" for="remember"><%= f.check_box :remember_me %> <%= f.label :remember_me %></label>
+      <% end -%>
+
+      <div class="button-login">	
+        <%= f.submit "Войти", class: 'btn btn-primary' %>
+      </div>
+      <div class="clearfix"></div>
+      
+      <% flash.each do |name, msg| %>
+        <%=  content_tag :p, msg, id: "flash_#{name}" %>
+      <% end %>
+      
+    </fieldset>
+  <% end %>
+                        
+  <hr>
+    
+  <%= render "devise/shared/links" %>
+</div>

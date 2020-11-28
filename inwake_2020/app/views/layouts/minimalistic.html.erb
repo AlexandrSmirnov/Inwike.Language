@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	
+	<!-- start: Meta -->
+	<meta charset="utf-8">
+        <title>LANG</title>
+        <%= favicon_link_tag 'favicon.ico' %>
+	
+	<!-- start: Mobile Specific -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- end: Mobile Specific -->
+        
+        <!-- Bootstrap Core CSS -->
+        <%= stylesheet_link_tag "bootstrap.min" %>
+
+        <!-- Fonts -->
+        <%= stylesheet_link_tag "font-awesome.min" %>
+        <%= stylesheet_link_tag "admin.style" %>
+        <%= stylesheet_link_tag "admin.retina" %>
+	
+	<!--[if IE 9]>
+            <%= stylesheet_link_tag "admin.ie9" %>
+	<![endif]-->
+
+        
+	<style type="text/css">body { background: url("<%= asset_path 'bg-login.jpg' %>") !important; }</style>
+		
+		
+		
+</head>
+
+<body>
+		<div class="container">
+		<div class="row">
+
+					
+			<div class="row">
+                          
+                                        <%= yield %>
+			</div><!--/row-->
+			
+				</div><!--/row-->
+				
+	</div><!--/container-->
+	
+	
+	
+        <%= javascript_include_tag "jquery-2.1.1.min" %>
+        <%= javascript_include_tag "jquery_ujs" %>
+        <!--<%= javascript_include_tag "turbolinks" %>-->
+        <%= javascript_include_tag "admin.core" %>
+	
+</body>
+</html>

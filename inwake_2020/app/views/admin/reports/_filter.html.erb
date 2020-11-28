@@ -1,0 +1,29 @@
+<div class="col-sm-12">
+  <div class="box">
+    <div class="box-header">
+      <h2><i class="fa fa fa-file-text-o"></i><span class="break"></span>Формирование отчета</h2>
+    </div>
+    <div class="box-content">
+      
+      <%= form_tag(admin_show_report_path, method: 'get', class: 'form-inline') do %>
+
+        <div class="form-group">
+          <%= collection_select :filter, :tutor_id, User.with_role('tutor'), :id, :name, {:include_blank => "Выберите преподавателя", :selected => @filter_params['tutor_id']}, {:class => "form-control"} %>
+        </div>
+
+        <div class="form-group" style="width: 300px">
+          <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+              <%= hidden_field_tag "filter[start]", @filter_params['start'] %>
+              <%= hidden_field_tag "filter[end]", @filter_params['end'] %>
+              <%= text_field_tag "filter[time_interval]", @filter_params['time_interval'], :class => "form-control", :placeholder => "Выберите временной промежуток" %>
+          </div>
+        </div>
+
+        <%= submit_tag "Отобразить отчет", class: "btn btn-primary" %>
+
+      <% end %>
+              
+    </div>
+  </div>
+</div><!--/col-->

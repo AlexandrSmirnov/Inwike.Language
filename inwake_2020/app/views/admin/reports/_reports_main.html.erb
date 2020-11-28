@@ -1,0 +1,58 @@
+<%= render 'filter' %>
+
+<div class="col-sm-12">
+  <div class="box">
+    <div class="box-header">
+      <h2><i class="fa fa-align-justify"></i><span class="break"></span>Отчеты</h2>
+    </div>
+    <div class="box-content">
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Преподаватель</th>
+            <th>Временной интервал</th>
+            <th>Дата создания</th>
+            <th>Количество занятий</th>
+            <th>Вознаграждение преподавателя</th>
+            <th>Для перевода</th>
+            <th>Статус</th>
+            <th></th>
+          </tr>
+        </thead>   
+        <tbody>                                
+
+        <% @reports.each do |report| %>                                
+          <tr>
+            <td><%= report.user.name %></td>
+            <td>
+                с <%= DateTime.strptime(report.start.to_s, '%s').strftime('%Y-%m-%d') %>
+                по <%= DateTime.strptime(report.end.to_s, '%s').strftime('%Y-%m-%d') %>
+            </td>
+            <td><%= report.created_at %></td>
+            <td><%= report.classes_count %></td>
+            <td><%= report.fee %></td>
+            <td><%= report.fee_for_transfer %></td>
+            <td>
+              <% if report.is_executed %>  
+                <span class="label label-success">Перевод выполнен</span>
+              <% else %>  
+                <a class="btn btn-success" href="<%= admin_report_set_as_executed_path(report) %>" rel="nofollow" data-confirm="Действительно отметить как оплаченный?">Отметить как оплаченный</a>
+              <% end %>  
+            </td>
+            <td>
+              <a class="btn btn-info" href="<%= get_report_link(report.user_id, report.start, report.end) %>"><i class="fa fa-edit "></i></a>              
+              <% unless report.is_executed %>  
+                <a class="btn btn-danger" href="<%= admin_report_path(report) %>" data-method="delete" rel="nofollow" data-confirm="Действительно удалить?"><i class="fa fa-trash-o "></i></a>
+              <% end %>  
+            </td>
+          </tr>
+        <% end %>                                  
+        </tbody>
+      </table>    
+        
+    </div>
+  </div>
+</div>
+
+<%= javascript_include_tag "admin/reports" %>

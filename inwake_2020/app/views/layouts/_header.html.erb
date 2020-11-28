@@ -1,0 +1,47 @@
+
+<header class="header">
+  <div class="container">
+    <div class="mobile-header row visible-xs-block">
+
+      <div class="mobile-menu-icon">
+        <a class="menu-button" href="#"><i class="icon-menu"></i></a>
+      </div>
+
+      <div class="mobile-login">
+        <a class="button button_orange login-button" href="<%= new_user_session_path %>">
+          <i class="login-button__icon icon-user"></i>
+          <span class="login-button__text"><%= t('general.my_account') %></span>
+        </a>
+      </div>
+
+    </div>
+	
+
+    <a class="brand-logo" href="<%= root_path :only_path => false %>">
+      <span class="brand-logo__text">LANG</span>
+    </a>
+
+    <div class="brand-descr">
+        LANG - помощь в изучении языка
+    </div>
+
+    <div class="login-top hidden-xs">
+      <a class="button button_orange login-button" href="<%= new_user_session_path %>">
+        <i class="login-button__icon icon-user"></i>
+        <span class="login-button__text"><%= t('general.my_account') %></span>
+      </a>					
+    </div>
+					
+  </div>
+</header>
+
+<div class="hidden" class="nav-box <%= defined?(nav_class) ? nav_class : '' %>">
+  <div class="container">
+    <div class="row">
+      <nav class="nav col-xs-12 col-sm-9">
+
+      </nav>
+    </div>
+  </div>
+</div>
+

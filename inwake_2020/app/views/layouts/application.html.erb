@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>LANG</title>
+    <%= favicon_link_tag 'favicon.ico' %>
+        
+    <!-- All styles -->
+    <%= stylesheet_link_tag "public_styles" %>
+  </head>
+        
+  <body>
+    <div class="wrapper">
+      
+      <%= render 'layouts/header', :nav_class => 'nav-box_margins' %>			
+      
+      <div class="page">
+        <%= yield %>
+      </div>
+
+    </div>		
+
+    <%= render 'layouts/footer' %>        
+      
+    <!-- Plugins styles -->    
+    <%= stylesheet_link_tag "public_styles_plugins" %>
+      
+    <!-- Javascript -->    
+    <%= javascript_include_tag "application" %>
+
+  </body>
+</html>

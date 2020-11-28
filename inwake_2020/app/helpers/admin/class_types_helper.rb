@@ -1,0 +1,2 @@
+module Admin::ClassTypesHelper
+end

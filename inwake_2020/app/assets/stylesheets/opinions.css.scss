@@ -1,0 +1,104 @@
+.box-reviews {
+    width: 100%;    
+    //overflow: auto;
+    background: url("pattern_people.png") repeat-x scroll 0 100%;
+}
+
+.reviews {
+    //width: 980px;
+    //margin: 88px auto 0;
+}
+
+.reviews-list {
+    margin-bottom: 70px;
+}
+
+.review-element {
+    background: #f6f6f6;
+    border-bottom: 1px solid #e6e6e6;
+    border-radius: 2px;
+    box-shadow: 0 0 1px #f6f6f6;
+    padding: 54px 39px 24px;
+    position: relative;
+    overflow: hidden;
+    font-size: 18px;
+    line-height: 25px;
+    margin-top: 25px;
+}
+
+.review-element__icon {
+    position: absolute;
+    left: 25px;
+    top: -12px;
+    color: #46b5bd;
+    font-size: 50px;
+}
+
+.review-element__text {
+}
+
+.review-element__tutor {
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.review-element__user {
+    color: #46b5bd;
+    font-weight: 600;
+    margin-top: 24px;
+}
+
+.review-element-separator {
+    clear: both;
+}
+
+.social-link {
+    background: #46b5bd;
+    border-radius: 50%;
+    color: #fff;
+    display: inline-block;
+    font-size: 15px;
+    height: 24px;
+    line-height: 24px;
+    margin-left: 10px;
+    text-align: center;
+    text-decoration: none;
+    width: 24px;
+}
+
+.social-link:hover {
+    background: #2aa2b4;
+}
+
+.opinions-show-others {
+    line-height: 54px;
+    margin-bottom: 80px;
+    text-align: center;
+}
+
+.opinion-tabs {
+    line-height: 40px;
+    
+}
+
+.opinion-tabs__element {
+    display: inline-block;
+    line-height: 20px;
+    margin: 0 14px;
+    text-decoration: none;
+    color: #46b5bd;
+    border-bottom: 1px solid;
+}
+
+.opinion-tabs__element:hover {
+    border-bottom: none;
+}
+
+.opinion-tabs__element_active {
+    border-radius: 2px;
+    line-height: 34px;
+    margin: 0 4px;
+    padding: 0 12px;
+    background: #46b5bd;
+    color: #ffffff;
+}

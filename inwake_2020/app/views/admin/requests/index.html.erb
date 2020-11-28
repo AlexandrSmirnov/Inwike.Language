@@ -1,0 +1,61 @@
+<div class="col-sm-12">
+  <div class="box">
+    <div class="box-header">
+      <h2><i class="fa fa-align-justify"></i><span class="break"></span>Заявки</h2>
+    </div>
+    <div class="box-content">
+      
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Имя</th>
+            <th>Телефон</th>
+            <th>Email</th>
+            <th>Ip</th>
+            <th>Предметы</th>
+            <th>Цели</th>
+            <th>Качества преподавателя</th>
+            <th>Удобное время</th>
+            <th>Комментарий</th>
+            <th>Дата добавления</th>
+          </tr>
+        </thead>   
+        <tbody>                                
+
+        <% @requests.each do |request| %>                                
+          <tr>
+            <td><%= request.name %></td>
+            <td>
+                <% if request.communication == 'phone' %>
+                  <b><%= request.phone %></b>
+                <% else %>
+                  <%= request.phone %>
+                <% end %>
+            </td>
+            <td>
+                <% if request.communication == 'email' %>
+                  <b><%= request.email %></b>
+                <% else %>
+                  <%= request.email %>
+                <% end %>
+            </td>
+            <td>
+              <% unless request.ip.blank? %>
+                <a href="http://www.infobyip.com/ip-<%= request.ip %>.html" target="_blank"><%= request.ip %></a>
+              <% end %>
+            </td>
+            <td><%= request.subjects %></td>
+            <td><%= simple_format(request.aims) %></td>
+            <td><%= simple_format(request.tutor_traits) %></td>
+            <td><%= simple_format(request.days) %></td>
+            <td><%= request.comments %></td>
+            <td><%= request.created_at  %></td>
+          </tr>
+        <% end %>                                  
+        </tbody>
+      </table>      
+      <%= render 'application/paginator', :count => @pages_count, :current => @current_page %>
+      
+    </div>
+  </div>
+</div><!--/col-->

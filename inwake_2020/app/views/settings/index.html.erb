@@ -1,0 +1,40 @@
+<div class="col-sm-6">  
+  <div class="box">
+    <div class="box-header">
+      <h2><i class="fa fa-unlock"></i><span class="break"></span><%= t('users.password_form_title') %></h2>
+    </div>    
+    <div class="box-content">
+      <%= render 'change_password' %>
+    </div> 
+  </div>   
+</div>
+
+<% if current_user.has_role?(:tutor) %>
+<div class="col-sm-6">
+  <div class="box">
+    <div class="box-header">
+      <h2><i class="fa fa-clock-o"></i><span class="break"></span><%= t('users.timezone_form_title') %></h2>
+    </div>    
+    <div class="box-content">
+      <%= render 'change_timezone' %>
+    </div> 
+  </div> 
+</div>
+<% end %>
+
+<%# if current_user.has_role?(:student) %>
+  <%#*<div class="col-sm-6">%>     
+    <%#*<div class="box">%>
+      <%#*<div class="box-header">%>
+        <%#*<h2><i class="fa fa-credit-card"></i><span class="break"></span>Привязанная карта</h2>%>
+      <%#*</div>%>    
+      <%#*<div class="box-content">%>
+        <%#= render 'settings/card_widget' %>
+      <%#*</div>%> 
+    <%#*</div>%> 
+  <%#*</div>%>
+<%# end %>
+
+
+
+<%= javascript_include_tag "settings" %>

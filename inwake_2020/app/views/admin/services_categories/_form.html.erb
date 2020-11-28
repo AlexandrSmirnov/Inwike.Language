@@ -1,0 +1,57 @@
+<%= form_for [:admin, @services_category] do |f| %>
+
+  <% if @services_category.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@services_category.errors.count, "error") %> prohibited
+        this article from being saved:</h2>
+      <ul>
+      <% @services_category.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <label class="control-label" for="name"><%= f.label :name %></label>
+    <div class="controls">
+        <%= f.text_field :name, class: "form-control" %>
+    </div>
+  </div>
+
+  <% if ege? %>  
+    <div class="form-group">
+      <label class="control-label" for="icon_class"><%= f.label :icon_class %></label>
+      <div class="controls">
+          <%= f.text_field :icon_class, class: "form-control" %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <label class="control-label" for="name_en"><%= f.label :name_en %></label>
+    <div class="controls">
+        <%= f.text_field :name_en, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="text"><%= f.label :text %></label>
+    <div class="controls">
+        <%= f.text_area :text, class: "form-control wysibb" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="text_en"><%= f.label :text_en %></label>
+    <div class="controls">
+        <%= f.text_area :text_en, class: "form-control wysibb" %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit "Сохранить", class: "btn btn-primary" %>
+    <%= link_to "Назад", admin_services_path, class: "btn" %>
+  </div>
+
+<% end %>

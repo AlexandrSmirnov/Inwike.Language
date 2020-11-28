@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	
+	<meta charset="utf-8">
+	<title>LANG</title>
+        <%= favicon_link_tag 'favicon.ico' %>
+        <%= csrf_meta_tags %>
+	
+	<!-- start: Mobile Specific -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- end: Mobile Specific -->
+	
+	<!-- start: CSS -->
+        <%= stylesheet_link_tag "bootstrap.min" %>    
+        <%= stylesheet_link_tag "jquery-ui-1.10.3.custom.min" %>    
+        <%= stylesheet_link_tag "font-awesome.min" %>   
+        <%= stylesheet_link_tag "fullcalendar2" %>  
+        <%= stylesheet_link_tag "jquery.gritter" %>  
+        <%= stylesheet_link_tag "select2" %>  
+        <%= stylesheet_link_tag "daterangepicker" %>  
+        <%= stylesheet_link_tag "screenHints" %>
+        <%= stylesheet_link_tag "animate" %>
+        <%= stylesheet_link_tag "wbbtheme" %>
+        <%= stylesheet_link_tag "admin.style" %>
+        <%= stylesheet_link_tag "admin.retina" %>
+        
+        <%= stylesheet_link_tag "lesson" %>
+        <%= stylesheet_link_tag "homework" %>   
+	<!-- end: CSS -->
+	
+	<!--[if IE 9]>
+            <%= stylesheet_link_tag "admin.ie9" %>
+	<![endif]-->
+        
+        <%= stylesheet_link_tag "admin" %>
+        
+        <%= javascript_include_tag "jquery-2.1.1.min" %>
+        <%= javascript_include_tag "bootstrap.min" %>
+        <%= javascript_include_tag "moment" %>
+        <%= javascript_include_tag "moment-timezone-with-data-2010-2020" %>
+        <%= javascript_include_tag "jquery-ui-1.10.3.custom.min" %>
+        <%= javascript_include_tag "jquery_ujs" %>
+        <%= javascript_include_tag "jquery.daterangepicker" %>
+        <%= javascript_include_tag "fullcalendar2" %>
+        <%= javascript_include_tag "turbolinks" %>        
+        <%= javascript_include_tag "jquery.dataTables" %>
+        <%= javascript_include_tag "dataTables.bootstrap" %>        
+        <%= javascript_include_tag "wow.min.js" %>
+        <%= javascript_include_tag "jquery.scrollTo" %>
+        <%= javascript_include_tag "jquery.form" %>
+        <%= javascript_include_tag "jquery.fullscreen" %>
+        <%= javascript_include_tag "jquery.gritter" %>
+        <%= javascript_include_tag "screenHints" %>
+        <%= javascript_include_tag "howler" %>
+        <%= javascript_include_tag "jquery.wysibb" %>
+        <%= javascript_include_tag "jquery.wysibb.ru" %>
+        <%= javascript_include_tag "console-listener.js" %>
+        <%= javascript_include_tag "store2.js" %>
+        <%= javascript_include_tag "autolinker" %>
+        <%= javascript_include_tag "select2.min.js" %>
+        <%= javascript_include_tag "select2-ru.js" %>
+        <%= javascript_include_tag "admin.core" %>
+			
+        <%= javascript_include_tag "i18n", "translations" %>
+        <script type="text/javascript">
+          I18n.defaultLocale = "<%= I18n.default_locale %>";
+          I18n.locale = "<%= I18n.locale %>";
+        </script>        
+        
+        <%= javascript_tag "var realtime;" %>   
+        
+        <% unless current_user.time_zone.blank? %>
+          <%= javascript_tag "var TIMEZONE = '#{ActiveSupport::TimeZone::MAPPING[current_user.time_zone]}';" %>  
+        <% end %>
+        
+        <%= javascript_include_tag "admin" %>        
+        
+        
+        <%= javascript_include_tag "websocket_rails/main" %>
+        <%= javascript_include_tag "eventDispatcher" %>
+        <%= javascript_include_tag "sfRealtime" %>
+        <%= javascript_include_tag "sfMessenger" %>
+        <%= javascript_include_tag "lesson/lesson" %>
+        <%= javascript_include_tag "sfVoiceRecorder" %>
+        
+</head>
+
+<body>
+    <div id="wrap">
+		<!-- start: Header -->
+	<div class="navbar" id="navbar">
+		<div class="navbar-inner">
+			<div class="container">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".sidebar-nav.nav-collapse">
+				      <span class="icon-bar"></span>
+				      <span class="icon-bar"></span>
+				      <span class="icon-bar"></span>
+				</button>
+                              <% if ege? %>
+				<a class="navbar-brand" href="#"><span>LANG</span></a>
+                              <% end %>
+				<!-- start: Header Menu -->
+				<div class="nav-no-collapse header-nav" id="header-nav">
+					<ul class="nav pull-right">
+
+                                          
+                                          <!-- На мобильных нет ссылки на облако-->
+                                          <!-- кнопки "Сообщить о проблеме" и статуса Online/Offline -->
+                                          <% if mobile_device == "desktop" %>
+                                            <li class="connection-box">
+                                                <span class="label label-warning"><i class="fa fa-meh-o"></i> Connecting...</span>
+                                            </li>
+
+                                          <% end %>
+                                          
+                                                <%=  render(:partial => "application/usermenu") %>
+
+					</ul>
+                                  
+				</div>
+				<!-- end: Header Menu -->
+				
+			</div>
+		</div>
+	</div>
+	<!-- start: Header -->
+	<div class="container" id="main">
+          <div class="row full_height"> 
+            
+            <%= render(:partial => "application/leftmenu") %>
+							
+            <!-- start: Content -->
+            <div id="content" class="col-sm-11 full_height" style="min-height: 630px">			
+              <div class="row full_height">
+                <%= yield %>
+              </div><!--/row-->
+            </div>
+            <!-- end: Content -->	
+				
+          </div><!--/row-->
+	</div><!--/container-->
+	
+	<div class="clearfix"></div>
+        
+        <%= render(:partial => "application/error_report") %>
+        
+    </div>
+	
+	<footer>
+		
+		<div class="row">
+
+		</div><!--/.row-->
+		
+	</footer>
+</body>
+</html>

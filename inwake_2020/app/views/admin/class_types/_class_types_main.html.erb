@@ -1,0 +1,34 @@
+<div class="col-sm-12">
+  <div class="box">
+    <div class="box-header">
+      <h2><i class="fa fa-align-justify"></i><span class="break"></span>Типы занятий</h2>
+    </div>
+    <div class="box-content">
+      
+      <a class="btn btn-success" href="<%= new_admin_class_type_path %>"><i class="fa fa-plus"></i> Добавить тип</a>
+      <br/>
+      
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Название типа</th>
+            <th> </th>
+          </tr>
+        </thead>   
+        <tbody>                                
+
+        <% @class_types.each do |class_type| %>                                
+          <tr>
+            <td><%= class_type.name %></td>
+            <td>
+              <a class="btn btn-info" href="<%= edit_admin_class_type_path(class_type) %>"><i class="fa fa-edit "></i></a>
+              <a class="btn btn-danger" href="<%= admin_class_type_path(class_type) %>" data-method="delete" rel="nofollow" data-confirm="Действительно удалить?"><i class="fa fa-trash-o "></i></a>
+            </td>
+          </tr>
+        <% end %>                                  
+        </tbody>
+      </table>      
+      
+    </div>
+  </div>
+</div><!--/col-->

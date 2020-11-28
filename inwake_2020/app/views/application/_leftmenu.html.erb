@@ -1,0 +1,24 @@
+<!-- start: Main Menu -->
+<div id="sidebar-left" class="col-sm-1">
+  <div class="nav-collapse sidebar-nav collapse navbar-collapse bs-navbar-collapse">
+      <%=
+        if (current_user.has_role? :tutor) && (current_user.has_role? :admin)
+          render(:partial => "lesson/menu_also_admin") 
+        end
+      %>
+      <%=
+        if (current_user.has_role? :tutor) && (current_user.roles.count < 2)
+          render(:partial => "lesson/menu_only_tutor") 
+        end
+      %>
+      <%=
+        if (current_user.has_role? :admin) && (current_user.roles.count < 2)
+          render(:partial => "admin/menu") 
+        elsif current_user.has_role? :student
+          render(:partial => "student/menu") 
+        end
+      %>
+  </div>
+</div>
+<a id="main-menu-toggle" class="hidden-xs open"><i class="fa fa-bars"></i></a>
+<!-- end: Main Menu -->

@@ -1,0 +1,175 @@
+<%= render 'filter' %>  
+
+<div class="col-sm-3">
+  <div class="box">
+    <div class="box-header">
+      <h2><i class="fa fa-calendar"></i><span class="break"></span><%= t('statistics.classes') %></h2>
+    </div>
+    <div class="box-content">      
+
+          <table class="table table-condensed">
+            <thead>
+              <tr>
+                <th><%= t('statistics.classes_total') %></th>
+                <th><%= @classes[:total] %></th>                  
+              </tr>
+            </thead>
+            <tbody>                
+              <tr>
+                <td><%= t('statistics.classes_free') %></td>
+                <td><%= @classes[:free] %></td>
+              </tr>
+              <tr>
+                <td><%= t('statistics.classes_paid') %></td>
+                <td><%= @classes[:paid] %></td>
+              </tr>
+              <tr>
+                <td><%= t('statistics.classes_not_paid') %></td>
+                <td><%= @classes[:not_paid] %></td>
+              </tr>
+              <tr>
+                <td><%= t('statistics.classes_missed') %></td>
+                <td><%= @classes[:missed] %></td>
+              </tr>
+              <tr>
+                <td><%= t('statistics.classes_missed_paid') %></td>
+                <td><%= @classes[:missed_paid] %></td>
+              </tr>
+            </tbody>           
+          </table>
+
+    </div>  
+  </div>
+</div>
+
+<div class="col-sm-3">
+  <div class="box">
+    <div class="box-header">
+      <h2><i class="fa fa-users"></i><span class="break"></span><%= t('statistics.students') %></h2>
+    </div>
+    <div class="box-content">
+          <table class="table table-condensed">
+            <thead>
+              <tr>
+                <th><%= t('statistics.classes_total') %></th>
+                <th><%= @classes[:total] %></th>                  
+              </tr>
+            </thead>
+            <tbody>  
+              <% @students.each do |student| %>
+                <tr>
+                  <td><%= student.student.name %></td>
+                  <td><%= student.count %></td>
+                </tr>
+              <% end %>
+            </tbody>           
+          </table>
+
+    </div>  
+  </div>
+</div>
+
+<div class="col-sm-3">
+  <div class="box">
+    <div class="box-header">
+      <h2><i class="fa fa-money"></i><span class="break"></span><%= t('statistics.payments') %></h2>
+    </div>
+    <div class="box-content">     
+
+      <table class="table table-condensed">
+        <thead>
+          <tr>
+            <th><%= t('statistics.incoming_funds') %></th>
+            <th><b class="green"><%= @benefits[:payments] %></b></th>                  
+          </tr>
+        </thead>
+        <tbody>                
+          <tr>
+            <td><%= t('statistics.carried_out_cost') %></td>
+            <td><b class="blue"><%= @benefits[:cost] %></b></td>
+          </tr>
+          <tr>
+            <td>Неоплачено состоявшихся</td>
+            <td><b class="red"><%= @benefits[:unpaid] %></b></td>
+          </tr>
+          <tr>
+            <td>Оплачено несостоявшихся</td>
+            <td><b class="yellow"><%= @benefits[:overpaid] %></b></td>
+          </tr>
+        </tbody>           
+      </table>
+    
+    </div>  
+  </div>
+</div>
+
+<div class="col-sm-3">
+  <div class="box">
+    <div class="box-header">
+      <h2><i class="fa fa-rub"></i><span class="break"></span><%= t('statistics.funds') %></h2>
+    </div>
+    <div class="box-content">     
+
+      <table class="table table-condensed">
+        <thead>
+          <tr>
+            <th><%= t('statistics.incoming_funds') %></th>
+            <th><b class="green"><%= @benefits[:payments] %></b></th>                  
+          </tr>
+        </thead>
+        <tbody>                
+          <tr>
+            <td><%= t('statistics.with_duty') %></td>
+            <td><%= @benefits[:payments_due] %></td>
+          </tr>          
+        </tbody>           
+      </table>
+    
+    </div>  
+  </div>
+</div>
+<div class="col-sm-12">
+  <div class="box">
+    <div class="box-header">
+      <h2><i class="fa fa-align-justify"></i><span class="break"></span><%= t('statistics.classes_list') %></h2>
+    </div>
+    <div class="box-content">
+      <%= form_for [:admin, Report.new] do |f| %>
+
+        <table class="table table-striped bootstrap-datatable datatable">
+          <thead>
+            <tr>
+              <th><%= t('statistics.date') %></th>
+              <th><%= t('statistics.student') %></th>
+              <th><%= t('statistics.type') %></th>
+              <th><%= t('statistics.status') %></th>
+              <th><%= t('statistics.start') %></th>
+              <th><%= t('statistics.end') %></th>
+              <th><%= t('statistics.duration') %></th>
+              <th><%= t('statistics.cost') %></th>
+              <th><%= t('statistics.with_duty') %></th>
+            </tr>
+          </thead>   
+          <tbody>     
+            <% @schedules.each do |schedule| %>
+              <tr>
+                <td><%= DateTime.strptime(schedule.time.to_s, '%s').strftime('%Y-%m-%d %H:%M:%S UTC') %></td>
+                <td><%= schedule.student.name %></td>
+                <td><%= schedule.class_type.name if schedule.class_type %></td>
+                <td><%= schedule.report_label.html_safe %></td>
+                <td><%= DateTime.strptime(schedule.start_time.to_s, '%s').strftime('%H:%M:%S UTC') if schedule.start_time? %></td>
+                <td><%= DateTime.strptime(schedule.end_time.to_s, '%s').strftime('%H:%M:%S UTC') if schedule.end_time? %></td>
+                <td><%= schedule.real_duration %></td>
+                <td><%= schedule.cost %></td>
+                <td><%= schedule.cost_with_due_from_payment if schedule.cost_with_due_from_payment.nonzero? %></td>
+              </tr>
+            <% end %>
+          </tbody>     
+        </table>
+
+      <% end %>              
+    </div>  
+  </div>
+</div>
+
+<%= javascript_include_tag "admin/reports" %>

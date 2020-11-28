@@ -1,0 +1,23 @@
+<%= form_tag(admin_users_path, method: 'get', class: 'form-inline') do %>
+
+  <div class="form-group">    
+    <%= collection_select :filter, :role, User::ROLES, lambda {|role| User::ROLES.index(role)}, :to_s, {:include_blank => "Все пользователи", :selected => @filter_params['role']}, {:class => "form-control"} %>
+  </div>
+  
+  <div class="form-group">
+    <%= text_field :filter, :name, {:class => "form-control", :placeholder => "Имя", :value => @filter_params['name']} %>
+  </div>
+
+  <div class="checkbox">
+    <label>
+      <%= check_box_tag "filter[with_debts]", 1, (@filter_params['with_debts'] ? true : false) %> Есть долги
+    </label>
+  </div>
+
+  <%= submit_tag "Показать", class: "btn btn-primary" %>
+
+  <% if !@filter_params.empty? %>
+    <%= link_to "Очистить фильтр", admin_users_path, class: "btn btn-default" %>
+  <% end %>
+
+<% end %>

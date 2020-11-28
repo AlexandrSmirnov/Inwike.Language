@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<url>
+    <loc><%= root_path :only_path => false %></loc>
+    <changefreq>daily</changefreq>
+    <priority>1.00</priority>
+</url>
+<url>
+    <loc><%= services_path :only_path => false %></loc>
+    <changefreq>daily</changefreq>
+    <priority>0.85</priority>
+</url>
+<% Service.all.each do |service| %>
+  <url>
+    <% if ege? %>
+     <loc>http://LANG.ru<%= service_path(:url => service.url) %></loc>
+    <% end  %>
+     <changefreq>daily</changefreq>
+     <priority>0.65</priority>
+  </url>
+<%  end %>
+<url>
+    <loc><%= prices_path :only_path => false %></loc>
+    <changefreq>daily</changefreq>
+    <priority>0.85</priority>
+</url>
+<url>
+    <loc><%= tutors_path :only_path => false %></loc>
+    <changefreq>daily</changefreq>
+    <priority>0.65</priority>
+</url>
+<% Tutor.all.each do |tutor| %>
+  <url>
+     <loc><%= tutor_path(tutor, :only_path => false) %></loc>
+     <changefreq>daily</changefreq>
+     <priority>0.65</priority>
+  </url>
+<%  end %>
+<url>
+    <loc><%= about_path :only_path => false %></loc>
+    <changefreq>daily</changefreq>
+    <priority>0.85</priority>
+</url>
+<url>
+    <loc><%= opinions_path :only_path => false %></loc>
+    <changefreq>daily</changefreq>
+    <priority>0.85</priority>
+</url>
+<url>
+<% unless ege? %>
+    <changefreq>daily</changefreq>
+    <priority>0.85</priority>
+<% end %>
+</url>
+</urlset>

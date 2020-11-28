@@ -1,0 +1,24 @@
+<!-- start: User Dropdown -->
+<li class="dropdown">    
+  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+    <i class="fa fa-user"></i> <%= current_user.email %>
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu">      
+    <% if current_user.roles.count > 1 %>
+      <% if current_user.has_role? :tutor %>
+        <li class="menu-role" data-role="tutor"><a href="javascript:void(0)" onclick="showMenuRole('tutor');"><%= t('general.tutor') %></a></li>
+     <% end %>
+     <% if current_user.has_role? :admin %>
+        <li class="menu-role" data-role="admin"><a href="javascript:void(0)" onclick="showMenuRole('admin');"><%= t('general.admin') %></a></li>
+     <% end %>
+     <% if current_user.has_role? :student %>
+        <li class="menu-role" data-role="student"><a href="javascript:void(0)" onclick="showMenuRole('student');"><%= t('general.student') %></a></li>
+      <% end %>
+    <% end %>
+      
+    <li><a href="<%= user_settings_path %>"><i class="fa fa-cog"></i> <%= t('users.settings') %></a></li>
+    <li><a href="<%= destroy_user_session_path %>" data-method="delete" rel="nofollow" data-confirm="<%= t('users.logout_confirmation') %>"><i class="fa fa-power-off"></i> <%= t('users.logout') %></a></li>
+  </ul>
+</li>
+<!-- end: User Dropdown -->

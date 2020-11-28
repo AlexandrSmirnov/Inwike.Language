@@ -1,0 +1,126 @@
+<%= form_for [:admin, @service] do |f| %>
+
+  <% if @service.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@service.errors.count, "error") %> prohibited
+        this article from being saved:</h2>
+      <ul>
+      <% @service.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <label class="control-label" for="name"><%= f.label :name %></label>
+    <div class="controls">
+        <%= f.text_field :name, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="name_en"><%= f.label :name_en %></label>
+    <div class="controls">
+        <%= f.text_field :name_en, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="url"><%= f.label :url %></label>
+    <div class="controls">
+        <%= f.text_field :url, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="sort_index"><%= f.label :sort_index %></label>
+    <div class="controls">
+        <%= f.number_field :sort_index, step: 1, class: "form-control" %>
+    </div>
+  </div>
+
+
+  <div class="form-group">
+    <label class="control-label" for="show_on_main"><%= f.label :show_on_main %></label>
+    <div class="controls">
+        <%= f.check_box :show_on_main %>
+    </div>
+  </div>
+
+
+  <div class="form-group">
+    <label class="control-label" for="category"><%= f.label :category %></label>
+    <div class="controls">
+        <%= f.collection_select :services_category_id, ServicesCategory.all, :id, :name, {:include_blank => 'None'}, :class=>'form-control' %>
+    </div>
+  </div>
+
+  <% if ege? %>
+    <div class="form-group">
+      <label class="control-label" for="class"><%= f.label :class %></label>
+      <div class="controls">
+        <% for class_num in Service::CLASSES %>
+          <%= check_box_tag "service[classes][#{class_num}]", class_num, @service.classes.include?(class_num), {:name => "service[classes][]"}%>
+          <%= label_tag "service_classes_#{class_num}", class_num %> 
+        <% end %>
+        <%= hidden_field_tag "service[classes][]", "" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label" for="advanced_education"><%= f.label :advanced_education %></label>
+      <div class="controls">
+          <%= f.check_box :advanced_education %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <label class="control-label" for="short_text"><%= f.label :short_text %></label>
+    <div class="controls">
+        <%= f.text_area :short_text, class: "form-control wysibb" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="short_text_en"><%= f.label :short_text_en %></label>
+    <div class="controls">
+        <%= f.text_area :short_text_en, class: "form-control wysibb" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="text"><%= f.label :text %></label>
+    <div class="controls">
+        <%= f.text_area :text, class: "form-control wysibb" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="text_en"><%= f.label :text_en %></label>
+    <div class="controls">
+        <%= f.text_area :text_en, class: "form-control wysibb" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="text_right"><%= f.label :text_right %></label>
+    <div class="controls">
+        <%= f.text_area :text_right, class: "form-control wysibb" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="text_right_en"><%= f.label :text_right_en %></label>
+    <div class="controls">
+        <%= f.text_area :text_right_en, class: "form-control wysibb" %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit "Сохранить", class: "btn btn-primary" %>
+    <%= link_to "Назад", admin_services_path, class: "btn" %>
+  </div>
+
+<% end %>

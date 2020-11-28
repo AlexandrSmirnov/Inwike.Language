@@ -1,0 +1,15 @@
+<ul class="nav nav-tabs nav-stacked main-menu" data-role="tutor">
+  <%# Настройки Quizlet для учеников по умолчанию скрыты:%>
+    <li>
+    <a class="hidden" href="<%= tutor_users_path %>"><i class="fa fa-users"></i><span class="hidden-sm"> <%= t('students.students') %></span></a>
+  </li>  
+  <li>
+    <a target="_blank" href="<%= tutor_calendar_index_path %>"><i class="fa fa-calendar"></i><span class="hidden-sm"> <%= t('calendar.calendar') %></span></a>
+  </li>        
+  <li>
+    <a href="<%= tutor_lesson_path %>" id="lesson-menu-link"><i class="fa fa-paper-plane-o"></i><span class="hidden-sm"> <%= t('lesson.lesson') %></span></a>
+  </li>    
+  <li>
+    <a target="_blank" href="<%= tutor_homework_index_path %>"><i class="fa fa-briefcase"></i><span class="hidden-sm"> <%= t('homework.homework') %></span></a>
+  </li>    
+</ul>

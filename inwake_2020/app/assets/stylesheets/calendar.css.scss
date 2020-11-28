@@ -1,0 +1,139 @@
+#external-events .badge {
+    cursor: pointer;
+}
+
+.fc-event-icon {
+    bottom: 2px;
+    left: 2px;
+    position: absolute;
+    font-size: 18px;
+}
+
+.fc-event-icon-2 {
+    bottom: 2px;
+    font-size: 18px;
+    position: absolute;
+    right: 6px;
+}
+
+.eventInfoBlock {
+    margin: 40px 0 0 0;
+}
+
+.eventInfoBody__text {
+    font-size: 14px;
+    margin: 0 0 15px 0;
+}
+
+.eventInfoBody__buttons {
+    margin: 5px 0 0 0;
+}
+
+.fc-event {
+    border: 1px solid #3a87ad;
+}
+
+.fc-event.vacant {
+    background-color: #67C2EF;
+    border-color: #67C2EF;
+}
+
+.fc-event.occupied {
+    background-color: #78CD51;
+    border-color: #57943b;
+}
+
+.fc-event.paid {
+    background-color: #cdb116;
+    border-color: #937f10;    
+}
+
+.fc-event.deferred_payment {
+    background-color: #ec772a;
+    border-color: #bf6021;    
+}
+
+.fc-event.free {
+    background-color: #ef1294;
+    border-color: #9d0d63;   
+}
+
+.fc-event.elapsed {
+    background-color: #adbeb3;
+    border-color: #86938a;    
+}
+
+.fc-event.missed {
+    background-color: #737373;
+    border-color: #6D6D6D;        
+}
+
+.eventStudentSelect {
+    margin: 10px 0;
+}
+
+.homework-panel {
+    background: none repeat scroll 0 0 whitesmoke;
+    margin: 0 -15px 10px;
+    padding: 12px 15px;
+}
+
+.homework-title {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.homework-title__link {
+    text-decoration: underline;
+}
+
+.homework-list {
+    margin: 5px 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: 12px;
+}
+
+.homework-list__element {    
+    line-height: 15px;
+    margin: 5px 0 0;
+    position: relative;
+}
+
+.homework-list__element:before {
+    content: "";
+    display: block;
+    font-family: FontAwesome;
+    font-size: 8px;
+    font-weight: normal;
+    left: -11px;
+    line-height: 16px;
+    position: absolute;
+    top: 0;
+    vertical-align: middle;
+}
+
+.homework-list__element_done {    
+    color: #78cd51;
+}
+
+.homework-list__element_done:before {
+    content: "";
+    left: -13px;
+    font-size: 10px;
+}
+
+.calendar-message {
+    margin: 50px 0 0;
+}
+
+.timeline {
+    position: absolute;
+    left: 59px;
+    border: none;
+    border-top: 1px solid red;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    z-index: 999;
+}

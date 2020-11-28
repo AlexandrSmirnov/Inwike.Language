@@ -1,0 +1,27 @@
+<%= form_for [:admin, @class_type] do |f| %>
+
+  <% if @class_type.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@class_type.errors.count, "error") %> prohibited
+        this article from being saved:</h2>
+      <ul>
+      <% @class_type.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <label class="control-label" for="name"><%= f.label :name %></label>
+    <div class="controls">
+        <%= f.text_field :name, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit "Сохранить", class: "btn btn-primary" %>
+    <%= link_to "Назад", admin_class_types_path, class: "btn" %>
+  </div>
+
+<% end %>

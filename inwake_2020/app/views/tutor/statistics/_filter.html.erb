@@ -1,0 +1,25 @@
+<div class="col-sm-12">
+  <div class="box">
+    <div class="box-header">
+      <h2><i class="fa fa fa-file-text-o"></i><span class="break"></span><%= t('statistics.time_span') %></h2>
+    </div>
+    <div class="box-content">
+      
+      <%= form_tag(tutor_statistics_path, method: 'get', class: 'form-inline') do %>
+
+        <div class="form-group" style="width: 400px">
+          <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+              <%= hidden_field_tag "filter[start]", @filter_params[:start] %>
+              <%= hidden_field_tag "filter[end]", @filter_params[:end] %>
+              <%= text_field_tag "filter[time_interval]", @filter_params[:time_interval], :class => "form-control", :placeholder => t('statistics.time_span_select') %>
+          </div>
+        </div>
+
+        <%= submit_tag t('general.show'), class: "btn btn-primary" %>
+
+      <% end %>
+              
+    </div>
+  </div>
+</div><!--/col-->

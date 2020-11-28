@@ -1,0 +1,81 @@
+<div class="col-sm-9">
+  <div class="box">
+    <div class="box-header">
+      <h2><i class="fa fa-pencil-square-o"></i><span class="break"></span>Редактирование пользователя</h2>
+    </div>
+    <div class="box-content">
+    
+      <%=
+        if (current_user.has_role? :admin)
+          render 'form'
+        end
+      %>    
+      
+    </div>
+  </div>
+</div>
+
+<div class="col-sm-3">
+  
+  <div class="box">
+    <div class="box-header">
+      <h2><i class="fa fa-money"></i><span class="break"></span>Долги</h2>
+    </div>
+    <div class="box-content">
+      
+      
+    </div>    
+  </div>  
+  
+  <div class="box">
+    <div class="box-header">
+      <h2><i class="fa fa-graduation-cap"></i><span class="break"></span>Типы занятий</h2>
+    </div>
+    <div class="box-content">
+     
+      <%= render 'class_types' %>             
+      
+    </div>    
+  </div>  
+    
+  <% if @benefits %>
+    <div class="box">
+      <div class="box-header">
+        <h2><i class="fa fa-calendar"></i><span class="break"></span>Расчеты с преподавателем</h2>
+      </div>
+      <div class="box-content">     
+
+        <table class="table table-condensed">
+          <thead>
+            <tr>
+              <th>Средств поступило</th>
+              <th><b class="green"><%= @benefits[:payments] %></b></th>                  
+            </tr>
+          </thead>
+          <tbody>                
+            <tr>
+              <td>С учетом комиссии</td>
+              <td><%= @benefits[:payments_due] %></td>
+            </tr>
+            <tr>
+              <td>Вознаграждение преподавателя</td>
+              <td><%= @benefits[:fee] %></td>
+            </tr>
+            <tr>
+              <td>Для перевода</td>
+              <td><%= @benefits[:fee_for_transfer] %></td>
+            </tr>
+            <tr>
+              <td>Доход</td>
+              <td><%= @benefits[:income] %></td>
+            </tr>
+          </tbody>           
+        </table>
+
+      </div>  
+    </div>
+  <% end %>
+  
+</div>
+
+<%= javascript_include_tag "admin/users" %>

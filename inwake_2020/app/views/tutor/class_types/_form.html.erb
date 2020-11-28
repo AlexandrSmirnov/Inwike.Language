@@ -1,0 +1,34 @@
+<%= form_for [:tutor, @class_type] do |f| %>
+
+  <% if @class_type.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@class_type.errors.count, "error") %> prohibited
+        this article from being saved:</h2>
+      <ul>
+      <% @class_type.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <label class="control-label" for="name">Название типа</label>
+    <div class="controls">
+        <%= f.text_field :name, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="cost">Стоимость занятия</label>
+    <div class="controls">
+        <%= text_field_tag 'tutor_class[cost]', @tutor_class ? @tutor_class.cost : '', {class: "form-control"} %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit "Сохранить", class: "btn btn-primary" %>
+    <%= link_to "Назад", tutor_users_path, class: "btn" %>
+  </div>
+
+<% end %>

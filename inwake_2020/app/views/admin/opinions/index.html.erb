@@ -1,0 +1,42 @@
+<div class="col-sm-12">
+  <div class="box">
+    <div class="box-header">
+      <h2><i class="fa fa-align-justify"></i><span class="break"></span>Отзывы</h2>
+    </div>
+    <div class="box-content">
+      
+      <a class="btn btn-success" href="<%= new_admin_opinion_path %>"><i class="fa fa-plus"></i> Добавить отзыв</a>
+      <br/>
+      
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Имя ученика</th>
+            <th>Имя преподавателя</th>
+            <th>Текст комментария</th>
+            <th> </th>
+          </tr>
+        </thead>   
+        <tbody>                                
+
+        <% @opinions.each do |opinion| %>                                
+          <tr>
+            <td><%= opinion.student_name %></td>
+            <td>
+                <%= if opinion.tutor then opinion.tutor.name else '' end %>
+            </td>
+            <td><%= truncate(opinion.text, length: 180, separator: ' ') %></td>   
+            <td>
+              <a class="btn btn-info" href="<%= edit_admin_opinion_path(opinion) %>"><i class="fa fa-edit "></i></a>
+              <a class="btn btn-danger" href="<%= admin_opinion_path(opinion) %>" data-method="delete" rel="nofollow" data-confirm="Действительно удалить?"><i class="fa fa-trash-o "></i></a>
+            </td>
+          </tr>
+        <% end %>                                  
+        </tbody>
+      </table>      
+      
+      <%= render 'application/paginator', :count => @pages_count, :current => @current_page %>
+      
+    </div>
+  </div>
+</div><!--/col-->
