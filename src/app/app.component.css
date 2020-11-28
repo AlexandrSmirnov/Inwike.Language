@@ -1,0 +1,351 @@
+body {
+    background-image: linear-gradient(to bottom right, rgb(57, 63, 125), rgb(75, 57, 121), rgb(93, 52, 117), rgb(111, 46, 113), rgb(129, 40, 109), rgb(147, 34, 105), rgb(165, 29, 101), rgb(183, 23, 97), rgb(201, 17, 93), rgb(219, 11, 89), rgb(237, 6, 85), rgb(255, 0, 81));
+}
+
+.container {
+    max-width: 1140px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.panel {
+    width:800px;
+    height: 100%;
+    background-color: white;
+    padding: 30px 40 px;
+    margin: 20px auto;
+    border-radius: 20px;
+    box-shadow:0 0 15px #494949;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+}
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+
+}
+
+h4 {
+    font-family: 'Open Sans', sans-serif;
+    color: black;
+    font-size: 30px;
+    text-align: center;
+}
+
+.form-control {
+    font-family: 'Open Sans', sans-serif;
+    color: black;
+    font-size: 16px;
+    resize: vertical; 
+    min-height: 40px;
+    min-width: 400px;
+    max-width: 400;  
+    border: none;
+    outline: none;
+    margin: 20px 0;
+    border-bottom: 1px solid #c7c7c7;
+
+}
+::placeholder {
+    font-family: 'Open Sans', sans-serif;
+    color: #c7c7c7;
+    font-size: 18px;
+
+}
+
+textarea:focus {
+    color: #000000;
+    border: none;
+    border-bottom: 1px solid red;
+}
+
+/* check-box */
+
+.div-checkbox {
+    text-align: center;
+    font-size: 24px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.select {
+    text-align: center;
+    font-size: 24px;
+    font-family: 'Open Sans', sans-serif;
+    display: flex;
+}
+
+.singleSelect {
+    margin-left: 10px;
+}
+
+.form-control:focus {
+    color: #000000;
+    border: none;
+    border-bottom: 1px solid red;
+}
+
+/* botton */
+
+button {
+    font-family: 'Open Sans', sans-serif;
+    align-items: center;
+    border-radius: 25px;
+    background-color: #ff5c36;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    height: 55px;
+    width: 240px;
+    transition: all 0.2s;
+    cursor: pointer;
+    outline: none;
+}
+
+button:active {
+    outline: none;
+    background-color: gray;
+    transform: translateY(4px);
+}
+
+.result {
+    padding: 30px;
+    margin: 30px auto;
+    width:800px;
+    height: 100%;
+    background-color: white;
+    padding: 30px 40 px;
+    border-radius: 10%;
+    box-shadow:0 0 15px #494949;
+}
+
+/* table */
+table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+  
+table td, table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+  
+table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+table tr:hover {
+    background-color: #ddd;
+}
+
+table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+    
+}
+.msg {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    height: 100%;
+    padding-top: 40PX;
+}
+
+.item1 {
+    display: flex;
+    justify-content: flex-start;
+    margin: 10PX;
+}
+
+.item2 {
+    display: flex;
+    justify-content: flex-end;
+    margin: 10PX;
+}
+
+.item11 {
+    padding: 10px;
+    border-radius: 20px;
+    background-color: rgb(75, 75, 75);
+    width: 200px;
+}
+
+.item22 {
+    padding: 10px;
+    border-radius: 20px;
+    width: 200px;
+    background-color: rgb(123, 132, 214);
+}
+
+.name-msg1 {
+    font-size: 18px;
+    line-height: 46px;
+    color: #ffffff;
+    font-weight: 400;
+    font-family: "Open Sans";
+    text-align: left;
+}
+
+.name-msg2 {
+    font-size: 18px;
+    line-height: 46px;
+    color: #ffffff;
+    font-weight: 400;
+    font-family: "Open Sans";
+    text-align: left;
+
+}
+
+.text-msg1 {
+    font-size: 18px;
+    line-height: 20px;
+    color: #ffffff;
+    font-weight: 400;
+    font-family: "Open Sans";
+    text-align: left;
+}
+
+.text-msg2 {
+    font-size: 18px;
+    line-height: 20px;
+    color: #ffffff;
+    font-weight: 400;
+    font-family: "Open Sans";
+    text-align: left;
+}
+
+.progress-ring, .progress-ring:before {
+    height: 10px;
+    width:200px;
+    margin-top: 30;
+    }
+    .progress-ring {
+    background-color: #b3d4fc;
+    display: -webkit-flex;
+    display: flex;
+    }
+    .progress-ring:before {
+    background-color: #3f51b5;
+    content: '';
+    -webkit-animation: running-progress 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    animation: running-progress 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+    @-webkit-keyframes running-progress {
+    0% { margin-left: 0px; margin-right: 100%; }
+    50% { margin-left: 25%; margin-right: 0%; }
+    100% { margin-left: 100%; margin-right: 0; }
+    }
+    @keyframes running-progress {
+    0% { margin-left: 0px; margin-right: 100%; }
+    50% { margin-left: 25%; margin-right: 0%; }
+    100% { margin-left: 100%; margin-right: 0; }
+}
+
+.red_symbol {
+    color: #fd9c86;
+}
+
+
+
+/* detail */
+.detail {
+    width:800px;
+    height: 100%;
+    background-color: white;
+    margin: 20px auto;
+    box-shadow:0 5px 15px #494949;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 30px;
+}
+
+.diferens {
+    display: flex;
+    padding: 5px;
+}
+p {
+    font-size: 20px;
+    font-family: 'Open Sans', sans-serif;
+    color: #6b6b6b;
+    text-transform: uppercase;
+    margin: 0;
+    padding-right: 20px;
+    padding-top: 10px;
+}
+
+#number {
+    font-size: 30px;
+    color: #ff5c36;
+    padding: 0;
+    margin: 0;
+
+
+}
+img {
+    height: 50px;
+    width: 50px;
+    margin-right: 20px;
+}
+
+.title {
+    width: 100%;
+    font-size: 30px;
+    font-family: 'Open Sans', sans-serif;
+    color: #6b6b6b;
+    padding: 0 5px;
+    text-align: center;
+}
+
+.detail-items {
+    display: flex;
+}
+
+.icon-status {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+
+.iphone {
+    position: relative;
+    width: 400px;
+    height: 800px;
+    background-color: rgb(3, 3, 3);
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.dinamic {
+    height: 50px;
+    width: 150px;
+    background-color: black;
+    border-radius: 10px;
+    position: absolute;
+    top: 0;
+}
+
+.iphone-display {
+    width: 360px;
+    height: 760px;
+    overflow: scroll;
+    background-color: rgb(255, 255, 255);
+    border-radius: 30px;
+    margin: auto;
+
+}
+
+#iphone_id {
+    background: none;
+    box-shadow: none;
+}
